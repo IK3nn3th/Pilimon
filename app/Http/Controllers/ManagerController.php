@@ -39,6 +39,7 @@ class ManagerController extends Controller
         $data->created_at = Carbon::now();
         $data->updated_at = Carbon::now();
         $data->views = 0;
+        $data->likes = 0;
         $data->save();
         return redirect()->route('manager.dashboard'); 
         
