@@ -1,4 +1,4 @@
-@extends('layouts.ManagerLayout')
+@extends('layouts.userlayout')
 
 @section('content')
 <div class = "w-4/5 m-auto text-center">
