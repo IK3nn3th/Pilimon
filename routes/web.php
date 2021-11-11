@@ -32,6 +32,11 @@ Route::delete('/admin/delete', [AdminController::class,'destroy']);
 Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide']);
 Route::get('/manager/Guidelist', [ManagerController::class, 'getGuides'])->name('guides.list');
 
+
+Route::get('/manager/historylogs', [ManagerController::class, 'getLogs'])->name('logs.list');
+Route::get('/admin/adminlogs', [AdminController::class, 'getLogs'])->name('admin.logs');
+
+
 Route::post('/manager/updateGuide',[ManagerController::class, 'GuideUpdate'])->name('guides.update');
 Route::delete('/manager/DeleteGuide',[ManagerController::class, 'deleteGuide'])->name('guides.delete');
 Route::post('/guide/{slug}/comments',[CommentController::class, 'store'])->name('comment.store');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Guides;
 use App\Models\User;
+use App\Models\logs;
+
 use DataTables;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -16,7 +18,10 @@ class ManagerController extends Controller
     
     function index(){
         $user = Auth::user();
-        return view('dashboard.manager.index')->with('user',$user);
+        
+        return view('dashboard.manager.index')
+  
+        ->with('user',$user);
     }
 
     public function SaveGuide(Request $req){
@@ -41,8 +46,36 @@ class ManagerController extends Controller
         $data->views = 0;
         $data->likes = 0;
         $data->save();
+
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Create";
+        $logs->Role = "Manager";
+        $logs->Content = "Created ". request('title') . " guide";
+        $logs->save();
         return redirect()->route('manager.dashboard'); 
         
+        
+    }
+
+    public function showLogs()
+    {   
+        $user = Auth::user();
+        return view('dashboard.manager.logs')->with('user',$user);
+        
+    }
+    public function getLogs(Request $request)
+    {
+        $user = Auth::user();
+  
+        $data = logs::join('users','users.id','=','logs.user')
+        ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
+        ->where('logs.role','Manager')
+        ->get();
+            
+            return view('dashboard.manager.logs')
+            ->with('data',$data)
+            ->with('user',$user);   
         
     }
 
@@ -53,6 +86,7 @@ class ManagerController extends Controller
             $data = Guides::join('users','users.id','=','guides.UserID')
             ->select('guides.id','guides.title','guides.category','guides.description','guides.content','users.fname','guides.created_at','guides.updated_at','guides.views','guides.likes')
             ->get();
+            
             return Datatables::of($data)
                 
 
@@ -91,14 +125,30 @@ class ManagerController extends Controller
         $guideDetails->content= $request->content;
         $guideDetails->UserID  = Auth::id();
         $guideDetails->save();
-   
+        
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Update";
+        $logs->Role = "Manager";
+        $logs->Content = "Updated guide ID: ".  $request->id . " with title: " .$request->title;
+        $logs->save();
+        
         return redirect()->route('manager.dashboard');   
     }
     public function deleteGuide(Request $request){
         
         $id = $request->id;
         $guide = Guides::findorFail($id);
+        $logtitle = $guide->title;
         $guide->delete();
+
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Delete";
+        $logs->Role = "Manager";
+        $logs->Content = "Delete guide ID: ".  $request->id . " with title: " .$logtitle;
+        $logs->save();
+
        return redirect()->route('manager.dashboard'); 
     
     }

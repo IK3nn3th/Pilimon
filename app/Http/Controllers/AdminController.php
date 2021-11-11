@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\logs;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,16 +18,25 @@ class AdminController extends Controller
 
         $user = User::all();
         $name = Auth::user();
-        return view('dashboard.admins.index', ['users'=>$user,])->with('name',$name);
+       
+        return view('dashboard.admins.index', ['users'=>$user,])
+        
+        ->with('name',$name);
     }
-
-    function profile(){
-        return view('dashboard.admins.profile');
+    public function getLogs(Request $request)
+    {
+        $name = Auth::user();
+  
+        $data = logs::join('users','users.id','=','logs.user')
+        ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
+      
+        ->get();
+            
+            return view('dashboard.admins.logs')
+            ->with('data',$data)
+            ->with('user',$name);   
+        
     }
-    function settings(){
-        return view('dashboard.admins.settings');
-    }
-
     
     public function store(Request $req){
         $req->validate([
@@ -46,8 +56,14 @@ class AdminController extends Controller
         $user->status = request('status');
         $user->save();
 
-      
-            return redirect()->route('admin.dashboard'); 
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Add user";
+        $logs->Role = "Admin";
+        $logs->Content = "Added the user ". request('fname') . request('lname') ." guide";
+        $logs->save();
+
+        return redirect()->route('admin.dashboard'); 
         
         
     }
@@ -72,6 +88,13 @@ class AdminController extends Controller
 
         
         User::where('id',$request->id)->update($update);
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Update user";
+        $logs->Role = "Admin";
+        $logs->Content = "Updated user information for User ID: ". $request->id. " with full name: " . $request->fname. $request->lname ;
+        $logs->save();
+
             return redirect()->route('admin.dashboard'); 
         
         
@@ -81,7 +104,16 @@ class AdminController extends Controller
         
         $id = $request->id;
         $user = User::findorFail($id);
+        $logname = $user->fname . $user->lname;
         $user->delete();
+
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Delete user";
+        $logs->Role = "Admin";
+        $logs->Content = "Delete user ID: ".  $request->id . " with full name: " .$logname;
+        $logs->save();
+
        return redirect()->route('admin.dashboard'); 
     
     }

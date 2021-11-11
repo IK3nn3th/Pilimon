@@ -13,16 +13,18 @@ class CreateCommentModule extends Migration
      */
     public function up()
     {
-        Schema::create('comment_module', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreign('UserID')
-            ->references('id')
-            ->on('users');
+            $table->unsignedBigInteger('UserID');
             $table->longText('comment');
+            $table->unsignedBigInteger('PostID');
+            $table->timestamps();
             $table->foreign('PostID')
             ->references('id')
             ->on('guides');
-            $table->timestamps();
+            $table->foreign('UserID')
+            ->references('id')  
+            ->on('users');
         });
     }
 

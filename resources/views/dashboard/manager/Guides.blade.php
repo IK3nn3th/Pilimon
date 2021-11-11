@@ -40,4 +40,7 @@
         </div>    
 </div>
 @endforeach
+<div> 
+{{$guides->links('pagination::bootstrap-4')}}
+</div>
 @endsection

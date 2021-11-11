@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Guides;
 use App\Models\comments;
+use App\Models\logs;
+
 class UserController extends Controller
 {
     function index(){
@@ -14,13 +16,13 @@ class UserController extends Controller
                 ->with('user',$user)
                 ->with('guides',Guides::join('users','users.id','=','guides.UserID')
                 ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-                ->orderby('guides.updated_at', 'DESC')->paginate(5));
+                ->orderby('guides.updated_at', 'DESC')->paginate(6));
             }
     return view('dashboard.user.index')
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-        ->orderby('guides.updated_at', 'DESC')->paginate(5));
+        ->orderby('guides.updated_at', 'DESC')->paginate(6));
     }
 
    
@@ -28,6 +30,12 @@ class UserController extends Controller
         
         $comment= comments::findorfail($id);
         $comment->delete();
+        $logs = new logs(); 
+        $logs->user= Auth::id();
+        $logs->Action = "Delete comment";
+        $logs->Role = "Admin";
+        $logs->Content = "Delete user ID: ".  $request->id . " with full name: " .$logname;
+        $logs->save();
         return back();
     }
 

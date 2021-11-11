@@ -10,14 +10,12 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <h1 class = text-xl><b>Manage Guides</b></h1>
-                        </div>
-                        <div class="col-xs-6">
                          <a href="#addGuideModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Guide</span></a>
-                                                    
+						 <a href="{{route('logs.list')}}" class="btn btn-success" ><i class="material-icons assignment">&#xe85d;</i> <span>View History Logs</span></a>                                             
                         </div>
                     </div>
                 </div>
-            <table class="table table-sm  datatable">
+            <table class="table table-sm  datatable" id = "datatable1">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -38,6 +36,9 @@
     </div>
 
 </div>
+
+
+
     <!-- Add  Modal HTML -->
     <div id="addGuideModal" class="modal fade bd-example-modal-lg">
             <div class="modal-dialog modal-lg">
@@ -179,7 +180,7 @@
 <script type="text/javascript">
   $(function () {
     
-    var table = $('.datatable').DataTable({
+    var table = $("#datatable1").DataTable({
    
 
         "pageLength": 10,
@@ -209,6 +210,8 @@
     
   });
 </script>
+
+
 
 <script>
 $(document).on('click','.edit',function(){

@@ -27,12 +27,12 @@ body {
 
 <div class="container">
 	<div class="header navbar bdrop">
+	
 				<img src="/images/logo_plmun.png" class="logo">
 				<nav>
 					<ul>
 					<li><a>Hello,  {{ $user['fname'] }}!</a></li>
-					
-					@if(Auth::user()->role==2)
+										@if(Auth::user()->role==2)
 						<li><a href="{{route('manager.dashboard')}}">Home </a></li>
 						<li><a href="{{route('manager.guides')}}">View Guides </a></li>
 					@else

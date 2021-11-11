@@ -17,6 +17,7 @@
 						</div>
 						<div class="col-xs-6">
 							<a href="#addUserModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+							<a href="{{route('admin.logs')}}" class="btn btn-success" ><i class="material-icons assignment">&#xe85d;</i> <span>View History Logs</span></a>
 												
 						</div>
 					</div>
@@ -77,6 +78,8 @@
 			</div>
 		</div>        
     
+
+
 	<!-- Add Modal HTML -->
 	<div id="addUserModal" class="modal fade">
 		<div class="modal-dialog">
