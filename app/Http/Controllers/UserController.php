@@ -46,17 +46,6 @@ class UserController extends Controller
           ->where('slug',$slug)
           ->orderby('comments.created_at', 'DESC')->paginate(5);
 
-          if(Auth::user()->role==2){
-              
-          return view('dashboard.manager.show')
-          ->with('comments',$comments)
-          ->with('user',$user)
-          ->with('guides', Guides::join('users','users.id','=','guides.UserID')
-          ->select('guides.id','guides.title','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-          ->where('slug',$slug)->first());
-        }
-
-
           return view('dashboard.user.show')
           ->with('comments',$comments)
           ->with('user',$user)

@@ -25,42 +25,51 @@ Route::get('/', function () {
 
 
 Auth::routes();
-Route::post('/admin/adduser', [AdminController::class,'store']);
-Route::post('/admin/edituser', [AdminController::class,'EditUser']);
-Route::delete('/admin/delete', [AdminController::class,'destroy']);
-
-Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide'])->name('guides.add');
-Route::get('/manager/Guidelist', [ManagerController::class, 'getGuides'])->name('guides.list');
-
-
-Route::get('/manager/historylogs', [ManagerController::class, 'getLogs'])->name('logs.list');
+//Public Admin routes
+Route::post('/admin/adduser', [AdminController::class,'store'])->name('add.user');
+Route::post('/admin/edituser', [AdminController::class,'EditUser'])->name('edit.user');
+Route::delete('/admin/delete', [AdminController::class,'destroy'])->name('delete.user');
 Route::get('/admin/adminlogs', [AdminController::class, 'getLogs'])->name('admin.logs');
 
 
+//Public Manager routes
+Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide'])->name('guides.add');
+Route::get('/manager/Guidelist', [ManagerController::class, 'getGuides'])->name('guides.list');
 Route::post('/manager/updateGuide',[ManagerController::class, 'GuideUpdate'])->name('guides.update');
 Route::delete('/manager/DeleteGuide',[ManagerController::class, 'deleteGuide'])->name('guides.delete');
+Route::get('/manager/dashboard', [ManagerController::class,'index'])->name('manager.dashboard');
+Route::get('/manager/historylogs', [ManagerController::class, 'getLogs'])->name('logs.list');
+
+//Public User routes
+Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
+Route::get('user/dashboard', [UserController::class,'index'])->name('user.dashboard');   
+Route::get('/guide/{slug}', [UserController::class,'show'])->name('manager.show');
+
+//Public Comment routes
 Route::post('/guide/{slug}/comments',[CommentController::class, 'store'])->name('comment.store');
 Route::post('/guide/{slug}/like',[CommentController::class, 'savelike'])->name('like.store');
-Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
-Route::get('/search',[SearchController::class,'search'])->name('web.search');
-Route::get('dashboard', [UserController::class,'index'])->name('user.dashboard');    
 
+//Public Search routes
+Route::get('/search',[SearchController::class,'search'])->name('web.search');
+
+
+//Private Group Routes
 Route::group(['prefix'=>'admin', 'middleware' =>['isAdmin','auth']], function(){
         Route::get('dashboard', [AdminController::class,'index'])->name('admin.dashboard');
-        Route::get('guide', [AdminController::class,'profile'])->name('admin.profile');
+        Route::get('/admin/userdetails', [AdminController::class, 'getUser'])->name('get.user');
+
         Route::get('settings', [AdminController::class,'settings'])->name('admin.settings');
       
     });
 
 Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
    
-    Route::get('/guide/{slug}', [UserController::class, 'show'])->name('guides.show');
     Route::get('settings', [UserController::class,'settings'])->name('user.settings');
    
 });
 
 Route::group(['prefix'=>'manager', 'middleware' =>['isManager','auth']], function(){
-    Route::get('dashboard', [ManagerController::class,'index'])->name('manager.dashboard');
+
     Route::get('guide', [UserController::class,'index'])->name('manager.guides');
     Route::get('settings', [ManagerController::class,'settings'])->name('manager.settings');
     Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');

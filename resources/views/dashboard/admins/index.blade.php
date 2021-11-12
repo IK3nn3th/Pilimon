@@ -1,44 +1,204 @@
-@extends('layouts.adminLayout')
-@section('content')
+<html>
+<head>
+
+<!-- Modal HTML -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-		<div class="table-responsive">
-			<div class="table-wrapper">
-				<div class="table-title">
-					<div class="row">
-						<div class="col-xs-6">
-							<h2> <b>Manage Accounts</b></h2>
-						</div>
-						<div class="col-xs-6">
-							<a href="#addUserModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
-							<a href="{{route('admin.logs')}}" class="btn btn-success" ><i class="material-icons assignment">&#xe85d;</i> <span>View History Logs</span></a>
-												
-						</div>
-					</div>
+
+<!-- Bulma CSS -->	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<!-- Fontawesome-->
+<script src="https://kit.fontawesome.com/3b6fb5d974.js" crossorigin="anonymous"></script>
+<!-- Material Icons-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Javascript-->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- Datatable HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+
+<style>
+
+html,
+body{
+		
+		background-color: #234D20;
+        position: relative;
+        min-height: 100vh
+       
+}
+.button{
+		color:#fff;
+		background: #77AB59;
+}
+
+.title h1{
+	color: #C9DF8A;
+	
+}
+.bm--card-equal-height {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+}
+.bm--card-equal-height .card-footer {
+   margin-top: auto;
+}
+
+.footer-size{
+background-color:#E7E6DA;
+padding: 10px 10px 10px;
+position: absolute;
+  bottom: 0;
+  width: 100%;
+
+}
+
+.guide{
+background-color:#A2AF9F;
+}
+.navbarcolor{
+background-color:#D6F4FF;
+}
+.category{
+background-color:#E7E6DA;
+}
+
+
+table {
+        table-layout: fixed;
+        width: 100px;
+      }
+
+td {
+        width: 2000px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+  .pagination-link, .pagination-next, .pagination-previous {
+    background-color:#fff;
+    border-color: #000;
+    color: #363636;
+  
+}
+</style>
+
+<title>Pilimon</title>
+
+</head>
+<body  class=" has-navbar-fixed-top">
+<nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+  @if(Auth::user()->role==2)
+    <a class="navbar-item" href="{{route('manager.dashboard')}}">
+      <img src="/images/P.png">
+    </a>
+  @elseif(Auth::user()->role==3)
+  <a class="navbar-item" href="{{route('user.dashboard')}}">
+      <img src="/images/P.png">
+    </a>
+	@elseif(Auth::user()->role==1)
+  	<a class="navbar-item" href="{{route('admin.dashboard')}}">
+      <img src="/images/P.png">
+    </a>
+  @endif
+    <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu  ">
+    <div class="navbar-start">
+		<h2 class ="navbar-item"><strong> Hello,  {{ $name['fname'] }}! </strong>	</h2>
+		<a class="navbar-item" href="{{route('admin.dashboard')}}">
+			<span class="icon-text">
+				<span class="icon">
+					<i class="fas fa-home"></i>
+				</span>
+				<strong>Home</strong>
+			</span>
+		</a>
+
+		<a class="navbar-item" href="{{route('manager.dashboard')}}">
+			<span class="icon-text">
+					<span class="icon">
+					<i class="material-icons">library_add</i>
+					</span>
+					<strong>Manage Guides</strong>
+			</span> 
+		</a>
+
+		<a class="navbar-item" href="{{route('user.dashboard')}}">
+			<span class="icon-text">
+					<span class="icon">
+					<i class="fas fa-book"></i>
+					</span>
+					<strong>View Guides</strong>
+			</span> 
+		</a>
+    </div>
+
+		<div class="navbar-end">
+			<div class="navbar-item">
+				<div class="buttons">
+				<a href="{{ route('logout') }}" class="button is-danger" onclick="event.preventDefault();
+																document.getElementById('logout-form').submit();">
+													{{ __('Logout') }}
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+													@csrf 
+								</form></a>
+					
+				
 				</div>
-				<table class="table table-striped table-hover" id ="datatable">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Email Address</th>
-							<th>Role</th>
-							<th>Status</th>
-						</tr>
-						@foreach($users as $user)
-							 <tr>
-								<td>{{$user->id}}</td>
-								<td>{{$user->fname}}</td>
-								<td>{{$user->lname}}</td>
-								<td>{{$user->email}}</td>
-							@switch($user->role)
+			</div>
+		</div>
+  	</div>
+</nav>
+
+<section class="section">
+
+<div class="">
+<h1 class="title has-text-white is-text-left">Manage User Accounts</h1>
+	<div class="buttons is-right">
+	
+				<a href="#addUserModal" class="button modal-button is-success " data-target = "#addUserModal" ><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Add New Guide</span> </a>
+				<a href="{{route('logs.list')}}" class="button is-link " ><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp; <span>View History Logs</span></a>
+								
+	</div>
+</div>
+   
+</section>
+<section class="section">								
+		<table id="example" class="table is-striped  is-narrow" style="width:100% ">
+			<thead>
+				<tr>
+							<th class="has-text-centered" style=" width: 15px;">ID</th>
+							<th style=" width: 100px;">Name</th>
+							<th style=" width: 100px;">Email Address</th>
+							<th class="has-text-centered" style=" width: 20px;">Role</th>
+							<th style=" width: 30px;">Status</th>
+							<th style=" width: 120px;">Created</th>
+							<th style=" width: 120px;">Updated</th>
+							<th style=" width: 30px;">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			@foreach($users as $user)
+				<tr>
+					<td class = "pl-5" style=" width: 25px;">{{$user->id}}</td>
+					<td>{{ $user->fname}} {{ $user->lname}}</td>
+					<td>{{ $user->email}}</td>
+					@switch($user->role)
 								@case(1)
 								<td>Admin</td>
 								@break
@@ -48,232 +208,324 @@
 								@case(3)
 								<td>Student</td>
 								@break
-							@endswitch
-							
-													
-								<td>{{$user->status}}</td>
-								<td><a href="" class="edit" id="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>	
+					@endswitch
 
-							</tr>
-						@endforeach
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-				<div class="clearfix">
-					<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">Previous</a></li>
-						<li class="page-item"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item active"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link">Next</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>        
-    
-
-
-	<!-- Add Modal HTML -->
-	<div id="addUserModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="/admin/adduser" method="POST">
-				@csrf
-					<div class="modal-header">						
-						<h4 class="modal-title">Add User Form</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					@include('dashboard.admins.form')
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-success" value="Add">
-					</div>
-				</form>
-				@if (count($errors) > 0)
- 				   <script type="text/javascript">
-				        $( document ).ready(function() {
- 				            $('#addUserModal').modal('show');
- 				       });
-				    </script>
-				@endif
-			</div>
-		</div>
+					<td>{{$user->status}}</td>
+					<td>{{ $user->created_at}}</td>
+					<td>{{ $user->updated_at}}</td>
+					<td><a href="#editUserModal" class="icon has-text-warning modal-button edit" data-id="{{$user->id}}" id="edit" data-target = "#editUserModal"><i class="fas fa-edit"></i></a>
+						<a href="#deleteUserModal" class="icon has-text-danger modal-button delete1" data-id="{{$user->id}}"  data-target = "#deleteUserModal"><i class="fas fa-trash-alt"></i></a></td>
+				</tr>
+			@endforeach				
+			</tbody>
+			
+		</table>					
 	</div>
-	<!-- Edit Modal HTML -->
-	<div id="editUserModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action ="/admin/edituser" method="POST">
-				@csrf
-					<div class="modal-header">						
-						<h4 class="modal-title">Edit Employee</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<input type="text"  hidden name="id" id="editid" required>
-					<table class="table table-striped"> 	
-					<tr>
-					<td colspan = "2">
-						<div class="form-group">
-							<label>Email Address</label>
-							<input type="email" name="email" id="editemail" class="form-control " required>
-							@error('email')
-                   			
-							<em class="text-danger"> {{ $message }}</em>
-                  			 
-              			  	@enderror
-						</div>
-					</td>
+</section>
+
+
+
+    <!-- Add  Modal HTML -->
+    <div id = "addUserModal" class = "modal">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Add User Form</p>	  
+					</header>
+						<section class="modal-card-body">
+							<form action="/admin/adduser" method="POST">
+								@csrf
+								<div class="columns">
+									<div class="column is-6">
+										<h5 class="title is-5">First Name</h5>
+										<input class="input is-success" name="fname" id="fname" value="{{ old('fname') }}" type="text" placeholder="First Name" required>
+											@error('fname')
+										
+											<em class="text-danger"> {{ $message }}</em>
+											
+											@enderror
+									</div>
+									<div class="column is-6">
+										<h5 class="title is-5">Last Name</h5>
+										<input class="input is-success" name="lname" id="lname" value="{{ old('lname') }}" type="text" placeholder="Last Name" required>
+											@error('lname')
+										
+											<em class="text-danger"> {{ $message }}</em>
+											
+											@enderror
+									</div>
+								</div>
+								<h5 class="title is-5">Email Address</h5>
+								<input class="input is-success" name="email" id="email" value="{{ old('email') }}" type="text" placeholder="Email Address" required>
+									@error('email')
+								
+									<em class="text-danger"> {{ $message }}</em>
+									
+									@enderror
+									<br><br>
+								<h5 class="title is-5">Password</h5>
+								<input class="input is-success" name="password" id="password" value="{{ old('password') }}" type="password" placeholder="Password" required>
+									@error('pass')
+								
+									<em class="text-danger"> {{ $message }}</em>
+									
+									@enderror
+									<br><br>
+
+
+								<div class="columns">
+									<div class="column is-6">
+										<div class="field ">
+											<h5 class="title is-5 ">Role</h5>
+												<div class="control is-expanded">
+													<div class="select is-success" >
+														<select name="role" id="role" value="{{ old('role') }}" type="text" required>
+															<option>Select dropdown</option>
+															<option value="3">Student</option>
+															<option value="2">Manager</option>
+															<option value="1">Admin</option>
+														</select>
+													</div>
+												</div>
+										@error('role')
+									
+										<em class="text-danger"> {{ $message }}</em>
+									
+										@enderror
+										</div>
+									</div>
+									<div class="column is-6">
+										<div class="field ">
+												<h5 class="title is-5 ">Status</h5>
+													<div class="control is-expanded">
+														<div class="select is-success" >
+															<select name="status" id="status" value="{{ old('status') }}" type="text"  required>
+																<option>Select dropdown</option>
+																<option value="active">Active</option>
+																<option value="inactive">Inactive</option>						
+															</select>
+														</div>
+													</div>
+											@error('status')
+										
+											<em class="text-danger"> {{ $message }}</em>
+										
+											@enderror
+										</div>
+									</div>
+								</div>
+										
+						</section>
+					<footer class="modal-card-foot">
+						<input type = "submit" class="button is-success" value="Add User">
+						<input type="button" class="button is-danger modalclose" data-target = "#addUserModal"  data-dismiss="modal" value="Cancel">
+					</form>	
+				</div>
 					
+	</div>
+    
+    <!-- Edit Modal HTML -->
+	<div id = "editUserModal" class = "modal">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Edit User Form</p>	  
+					</header>
+						<section class="modal-card-body">
+							<form action="{{route('edit.user')}}" method="POST">
+								@csrf
+								<input type="text"  hidden name="id" id="editid" required>
+								<div class="columns">
+									<div class="column is-6">
+										<h5 class="title is-5">First Name</h5>
+										<input class="input is-success" name="fname" id="editfname" value="{{ old('fname') }}" type="text" placeholder="First Name" required>
+											@error('fname')
+										
+											<em class="text-danger"> {{ $message }}</em>
+											
+											@enderror
+									</div>
+									<div class="column is-6">
+										<h5 class="title is-5">Last Name</h5>
+										<input class="input is-success" name="lname" id="editlname" value="{{ old('lname') }}" type="text" placeholder="Last Name" required>
+											@error('lname')
+										
+											<em class="text-danger"> {{ $message }}</em>
+											
+											@enderror
+									</div>
+								</div>
+								<h5 class="title is-5">Email Address</h5>
+								<input class="input is-success" name="email" id="editemail" value="{{ old('email') }}" type="text" placeholder="Email Address" required>
+									@error('email')
+								
+									<em class="text-danger"> {{ $message }}</em>
+									
+									@enderror
+									<br><br>
+								
+
+
+								<div class="columns">
+									<div class="column is-6">
+										<div class="field ">
+											<h5 class="title is-5 ">Role</h5>
+												<div class="control is-expanded">
+													<div class="select is-success" >
+														<select name="role" id="editrole" value="{{ old('role') }}" type="text" required>
+															<option>Select dropdown</option>
+															<option value="3">Student</option>
+															<option value="2">Manager</option>
+															<option value="1">Admin</option>
+														</select>
+													</div>
+												</div>
+										@error('role')
+									
+										<em class="text-danger"> {{ $message }}</em>
+									
+										@enderror
+										</div>
+									</div>
+									<div class="column is-6">
+										<div class="field ">
+												<h5 class="title is-5 ">Status</h5>
+													<div class="control is-expanded">
+														<div class="select is-success" >
+															<select name="status" id="editstatus" value="{{ old('status') }}" type="text"  required>
+																<option>Select dropdown</option>
+																<option value="active">Active</option>
+																<option value="inactive">Inactive</option>						
+															</select>
+														</div>
+													</div>
+											@error('status')
+										
+											<em class="text-danger"> {{ $message }}</em>
+										
+											@enderror
+										</div>
+									</div>
+								</div>
+										
+						</section>
+					<footer class="modal-card-foot">
+						<input type = "submit" class="button is-success" value="Save Changes">
+						<input type="button" class="button is-danger modalclose" data-target = "#editUserModal"  data-dismiss="modal" value="Cancel">
+					</form>	
+				</div>
 					
-					</tr>
-					<tr>
-					<td>
-						<div class="form-group">
-							<label>First Name</label>
-							<input type="text" class="form-control" id="editfname" name="fname" value="{{ old('lname') }}" required>
-							@error('fname')
-                   			 
-							<em class="text-danger"> {{ $message }}</em>
-                  			
-              			  	@enderror
-           
-						</div>
-					</td>
-					
-					<td>
-						<div class="form-group">
-							<label>Last Name</label>
-							<input type="text" class="form-control" id="editlname" name="lname" value="{{ old('lname') }}" required>
-							@error('lname')
-                   			 
-                    		<em class="text-danger"> {{ $message }}</em>
-                  			
-              			  	@enderror
-						</div>
-					</td>
-					</tr>
-					
-					<tr>
-                    <td>
-						<div class="form-group">
-							<label>Role</label>
-							<br>
-							<select name="role" id="editrole" class="form-control" required>
-								<option value="3">Student</option>
-								<option value="1">Administrator</option>
-								<option value="2">Manager</option>
-						
-							</select>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label>Status</label>
-							<br>
-							<select name="status" id="editstatus" class="form-control" required>
-								<option value="active">Active</option>
-								<option value="inactive">Inactive</option>
-							 </select>
-						</div>
-					</td>
-					<td>
-					</td>
-					<td>
-					</td>
-					</tr>
-					</table>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Save Changes">
-					</div>
-				</form>
-			</div>
-		</div>
 	</div>
 	<!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="/admin/delete" method="POST">
+	<div id="deleteUserModal" class="modal">
+		<div class="modal-background"></div>
+			<div class="modal-card">
+				<form action="{{route('delete.user')}}" method="POST">
 				@csrf
 				@method('DELETE')
-					<div class="modal-header">						
-						<h4 class="modal-title">Delete Employee</h4>
-						<input type="text"  hidden name="id" id="deleteID" required>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<p>Are you sure you want to delete these Records?</p>
-						<p class="text-warning"><small>This action cannot be undone.</small></p>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-danger" value="Delete">
-					</div>
+				
+										
+						<header class="modal-card-head">
+							<p class="modal-card-title">Delete User Information</p>	  
+						</header>
+						<input type="text"  hidden name="id" id="deleteID" required></input>
+						<section class="modal-card-body">
+							<p>Are you sure you want to delete these Records?</p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</section>
+					<footer class="modal-card-foot">
+						<input input type="button" class="button is-light has-text-black modalclose" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="button is-danger" value ="Delete">
+					</footer>
 				</form>
+				
 			</div>
-		</div>
 	</div>
 
-<script>
-$(document).ready(function(){
-	// code to read selected table row cell data (values).
-	$(".delete").on('click',function(){
-		 var currentRow=$(this).closest("tr");
-		 var id=currentRow.find("td:eq(0)").text(); // get current row 1st TD value	
-	
-		$("#deleteID").val(id);	
+
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+$(".modal-button").click(function() {
+          
+	var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
         
-		 $('#deleteEmployeeModal').modal('show');
-		
-	});
-});
+         });
+         
+		 $(".modalclose").click(function() {
+         
+            $(".modal").removeClass("is-active");
+         });
 </script>
+
 
 <script>
-$(document).ready(function(){
-	// code to read selected table row cell data (values).
-	$(".edit").on('click',function(){
-		 var currentRow=$(this).closest("tr");
-		 var id=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
-         var col1=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-         var col2=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
-		 var col3=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
-		 var col4=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
-		 var col5=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
-		 switch(col4) {
-			  case "Admin":
-				col4 = 1;
-			    break;
-			  case "Manager":
-				col4 = 2;
-			    break;
-			case "Student":
-				col4 = 3;
-				break
-			  default:
-				alert("wrong role");
-			}
-		 $("#editid").val(id);	
-         $("#editfname").val(col1);
-		 $("#editlname").val(col2);
-		 $("#editemail").val(col3);
-		 $("#editrole").val(col4);
-		 $("#editstatus").val(col5);
-		 
-		
-		$('#editUserModal').modal('show');
-		
-	});
+$(document).on('click','.edit',function(){
+	
+	var user_id = $(this).data('id');
+	
+	$.get("{{ route('get.user')}}" ,{user_id},function(data){
+	$("#editid").val(data.details.id);	
+	$("#editfname").val(data.details.fname);
+	$("#editlname").val(data.details.lname);
+	$("#editemail").val(data.details.email);
+	$("#editrole").val(data.details.role);
+	$("#editstatus").val(data.details.status);
+	},'json');
+
+ 
+})
+
+
+$(document).on('click','.delete1',function(){
+	var user_id = $(this).data('id');
+	$.get("{{ route('get.user')}}" ,{user_id},function(data){
+	$("#deleteID").val(data.details.id);
+	
+	},'json');
+
+ 
+})
+
+</script>
+<br><br><br><br><br><br>
+<footer class="footer footer-size">
+ 
+    <p class="content has-text-centered">
+      <strong>PILIMON</strong> by Eleazar Ines, Axcell Pontiga, Edric Belando. In Partial Fulfillment of the Requirements for the Degree of
+Bachelor of Science in Information Technology
+ 
+    </p>
+  </div>
+</footer>
+<script>
+$(document).ready(function() {
+
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+	
+  });
+
+	 $(".navbar-link").click(function() {
+
+   
+	$(".navbar-dropdown").toggleClass("is-hidden");
+  });
+
+	
 });
 </script>
-
-@endsection
-
+</body>
+</html>

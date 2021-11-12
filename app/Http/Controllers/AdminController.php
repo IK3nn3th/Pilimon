@@ -55,7 +55,7 @@ class AdminController extends Controller
         $user->role = request('role');
         $user->status = request('status');
         $user->save();
-
+        error_log($user);
         $logs = new logs(); 
         $logs->user= Auth::id();
         $logs->Action = "Add user";
@@ -67,6 +67,14 @@ class AdminController extends Controller
         
         
     }
+
+    public function getUser(Request $request){
+        $user_id = $request->user_id;
+        $userDetails = User::find($user_id);
+   
+        return response()->json(['details'=>$userDetails]);
+
+}
 
     public function EditUser(Request $request){
         $request->validate([

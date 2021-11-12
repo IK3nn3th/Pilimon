@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <!-- Fontawesome-->
 <script src="https://kit.fontawesome.com/3b6fb5d974.js" crossorigin="anonymous"></script>
+<!-- Material Icons-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!-- Javascript-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- Datatable HTML -->
@@ -106,7 +109,11 @@ td {
       <img src="/images/P.png">
     </a>
   @elseif(Auth::user()->role==3)
-  <a class="navbar-item" href="{{route('manager.dashboard')}}">
+  <a class="navbar-item" href="{{route('user.dashboard')}}">
+      <img src="/images/P.png">
+    </a>
+    @elseif(Auth::user()->role==1)
+  <a class="navbar-item" href="{{route('admin.dashboard')}}">
       <img src="/images/P.png">
     </a>
   @endif
@@ -138,10 +145,28 @@ td {
             <strong>Home</strong>
         </span>
       </a>
-      @endif
-
+    @elseif(Auth::user()->role==1)
+    <a class="navbar-item" href="{{route('admin.dashboard')}}">
+        <span class="icon-text">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            <strong>Home</strong>
+        </span>
+      </a>
+    @endif
+    @if(Auth::user()->role==1)
+    <a class="navbar-item" href="{{route('manager.dashboard')}}">
+			<span class="icon-text">
+					<span class="icon">
+					<i class="material-icons">library_add</i>
+					</span>
+					<strong>Manage Guides</strong>
+			</span> 
+		</a>
+    @endif
       @if(Auth::user()->role<=2)
-      <a class="navbar-item">
+      <a class="navbar-item" href="{{route('user.dashboard')}}">
         <span class="icon-text">
             <span class="icon">
             <i class="fas fa-book"></i>
@@ -150,24 +175,7 @@ td {
         </span> 
       </a>
       @endif
-      <div class="navbar-item has-dropdown is-hoverable" id = "Navdrop">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown is-hidden ">
-          <a class="navbar-item">
-            About
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div>
+     
     </div>
 
     <div class="navbar-end">

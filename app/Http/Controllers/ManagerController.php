@@ -71,15 +71,26 @@ class ManagerController extends Controller
     public function getLogs(Request $request)
     {
         $user = Auth::user();
-  
+      
+    if(Auth::user()->role==2){
         $data = logs::join('users','users.id','=','logs.user')
         ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
         ->where('logs.role','Manager')
         ->get();
-            
             return view('dashboard.manager.logs')
             ->with('data',$data)
-            ->with('user',$user);   
+            ->with('user',$user);
+
+    }
+    elseif(Auth::user()->role==1){
+        $data = logs::join('users','users.id','=','logs.user')
+        ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
+        ->get();
+        return view('dashboard.manager.logs')
+            ->with('data',$data)
+            ->with('user',$user);
+    }
+          
         
     }
 

@@ -55,7 +55,7 @@
                         </div>  
                         
                             <div class="card-content">
-                                <a href="/user/guide/{{$guide->slug}}" class="button is-rounded buttons is-centered ">Keep Reading</a>
+                                <a href="/guide/{{$guide->slug}}" class="button is-rounded buttons is-centered ">Keep Reading</a>
                             </div>
                
                         

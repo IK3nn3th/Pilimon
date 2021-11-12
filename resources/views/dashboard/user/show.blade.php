@@ -104,7 +104,7 @@
                                             </div>
                                     </div>
                                 </article>
-                                @if(Auth::user()->id === $comment->UserID)
+                                @if(Auth::user()->id === $comment->UserID || Auth::user()->role <= $comment->UserID)
                                     <div class="buttons is-centered">
                                             <form action="/comments/{{$comment->id}}" method = "POST">
                                                 @csrf 
@@ -113,7 +113,7 @@
                                                 </button>
                                                 </form>
                                     </div>
-                                    @endif
+                                @endif
                             </div>
                                 
                             @endforeach 
