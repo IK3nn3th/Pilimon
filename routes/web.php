@@ -29,7 +29,7 @@ Route::post('/admin/adduser', [AdminController::class,'store']);
 Route::post('/admin/edituser', [AdminController::class,'EditUser']);
 Route::delete('/admin/delete', [AdminController::class,'destroy']);
 
-Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide']);
+Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide'])->name('guides.add');
 Route::get('/manager/Guidelist', [ManagerController::class, 'getGuides'])->name('guides.list');
 
 
@@ -43,7 +43,7 @@ Route::post('/guide/{slug}/comments',[CommentController::class, 'store'])->name(
 Route::post('/guide/{slug}/like',[CommentController::class, 'savelike'])->name('like.store');
 Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
 Route::get('/search',[SearchController::class,'search'])->name('web.search');
-    
+Route::get('dashboard', [UserController::class,'index'])->name('user.dashboard');    
 
 Route::group(['prefix'=>'admin', 'middleware' =>['isAdmin','auth']], function(){
         Route::get('dashboard', [AdminController::class,'index'])->name('admin.dashboard');
@@ -56,7 +56,7 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
    
     Route::get('/guide/{slug}', [UserController::class, 'show'])->name('guides.show');
     Route::get('settings', [UserController::class,'settings'])->name('user.settings');
-    Route::get('dashboard', [UserController::class,'index'])->name('user.dashboard');
+   
 });
 
 Route::group(['prefix'=>'manager', 'middleware' =>['isManager','auth']], function(){

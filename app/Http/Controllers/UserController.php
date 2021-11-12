@@ -11,13 +11,7 @@ class UserController extends Controller
 {
     function index(){
         $user = Auth::user();
-            if(Auth::user()->role==2){
-                return view('dashboard.manager.Guides')
-                ->with('user',$user)
-                ->with('guides',Guides::join('users','users.id','=','guides.UserID')
-                ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-                ->orderby('guides.updated_at', 'DESC')->paginate(6));
-            }
+            
     return view('dashboard.user.index')
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
@@ -27,14 +21,14 @@ class UserController extends Controller
 
    
     public function deletecomment($id){
-        
+        $user = Auth::user();
         $comment= comments::findorfail($id);
         $comment->delete();
         $logs = new logs(); 
         $logs->user= Auth::id();
         $logs->Action = "Delete comment";
         $logs->Role = "Admin";
-        $logs->Content = "Delete user ID: ".  $request->id . " with full name: " .$logname;
+        $logs->Content = "Delete user ID: ".  $id . " with full name: $user  " ;
         $logs->save();
         return back();
     }

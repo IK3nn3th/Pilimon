@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Modal HTML -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -82,17 +79,13 @@ td {
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-.modal-card-foot .button {
-		color: #fff;
-		float: right;
-		font-size: 15px;
-		border: none;
-		min-width: 50px;
-		border-radius: 2px;
-		border: none;
-		outline: none !important;
-	}
 
+  .pagination-link, .pagination-next, .pagination-previous {
+    background-color:#fff;
+    border-color: #000;
+    color: #363636;
+  
+}
 </style>
 
 <title>Pilimon</title>
@@ -101,15 +94,10 @@ td {
 <body  class=" has-navbar-fixed-top">
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-  @if(Auth::user()->role==2)
-    <a class="navbar-item" href="{{route('manager.dashboard')}}">
+    <a class="navbar-item" href="{{route('user.dashboard')}}">
       <img src="/images/P.png">
     </a>
-  @elseif(Auth::user()->role==3)
-  <a class="navbar-item" href="{{route('manager.dashboard')}}">
-      <img src="/images/P.png">
-    </a>
-  @endif
+
     <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -119,37 +107,20 @@ td {
 
   <div id="navbarBasicExample" class="navbar-menu  ">
     <div class="navbar-start">
-    <h2 class ="navbar-item"><strong> Hello,  {{ $user['fname'] }}!</strong> </h2>
-    @if(Auth::user()->role==2)
-      <a class="navbar-item" href="{{route('manager.dashboard')}}">
+    <h2 class ="navbar-item"> Hello,  {{ $user['fname'] }}! </h2>
+      <a class="navbar-item" href="{{route('user.dashboard')}}">
         <span class="icon-text">
             <span class="icon">
                 <i class="fas fa-home"></i>
             </span>
-            <strong>Home</strong>
+            <span>Home</span>
         </span>
       </a>
-    @elseif(Auth::user()->role==3)
-    <a class="navbar-item" href="{{route('user.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <strong>Home</strong>
-        </span>
-      </a>
-      @endif
 
-      @if(Auth::user()->role<=2)
       <a class="navbar-item">
-        <span class="icon-text">
-            <span class="icon">
-            <i class="fas fa-book"></i>
-            </span>
-            <strong>View Guides</strong>
-        </span> 
+        Documentation
       </a>
-      @endif
+
       <div class="navbar-item has-dropdown is-hoverable" id = "Navdrop">
         <a class="navbar-link">
           More

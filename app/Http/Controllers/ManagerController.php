@@ -18,9 +18,13 @@ class ManagerController extends Controller
     
     function index(){
         $user = Auth::user();
+        $data = Guides::join('users','users.id','=','guides.UserID')
+        ->select('guides.id','guides.title','guides.category','guides.description','guides.content','users.fname' ,'users.lname','guides.created_at','guides.updated_at','guides.views','guides.likes')
+        ->get();
         
         return view('dashboard.manager.index')
-  
+        ->with('data',$data)
+      
         ->with('user',$user);
     }
 
@@ -82,35 +86,15 @@ class ManagerController extends Controller
     public function getGuides(Request $request)
     {
       
-        if ($request->ajax()) {
-            $data = Guides::join('users','users.id','=','guides.UserID')
-            ->select('guides.id','guides.title','guides.category','guides.description','guides.content','users.fname','guides.created_at','guides.updated_at','guides.views','guides.likes')
-            ->get();
-            
-            return Datatables::of($data)
-                
-
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="#editGuideModal" class="edit" id="edit" data-id="'.$row['id'].'" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteGuideModal" class="delete" id="delete" data-id="'.$row['id'].'" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>';
-                    return $actionBtn;
-                })
-                ->addColumn('updated_at', function($row)
-                {
-                    $date = date("jS M Y", strtotime($row->updated_at));
-                    return $date;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+        
+        
     }
 
 
     public function getDetails(Request $request){
             $guide_id = $request->guide_id;
             $guideDetails = Guides::find($guide_id);
-           
+       
             return response()->json(['details'=>$guideDetails]);
 
     }
