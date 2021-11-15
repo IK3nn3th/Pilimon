@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 
 <!-- Modal HTML -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 
 <!-- Bulma CSS -->	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
@@ -16,15 +17,45 @@
 
 <!-- Javascript-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<!-- Datatable HTML -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+<!-- Datatable-->
+ 
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	
+	
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
+<script type="text/javascript" class="init">
+	$(document).ready(function() {
+	var table = $('#example').DataTable( {
+		
+		responsive: true,
+		columnDefs: [
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2, targets: -1 }
+    ]
+	} );
+} );
+
+</script>
 <style>
+#example_info,
+label{
+color:white;
+}
+div.dataTables_wrapper div.dataTables_filter input{
+	margin-bottom:1.0em;
+}
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input{
+background-color:white;
 
+}
 html,
 body{
 		
@@ -37,7 +68,6 @@ body{
 		color:#fff;
 		background: #77AB59;
 }
-
 .title h1{
 	color: #C9DF8A;
 	
@@ -50,16 +80,13 @@ body{
 .bm--card-equal-height .card-footer {
    margin-top: auto;
 }
-
 .footer-size{
 background-color:#E7E6DA;
 padding: 10px 10px 10px;
 position: absolute;
   bottom: 0;
   width: 100%;
-
 }
-
 .guide{
 background-color:#A2AF9F;
 }
@@ -69,26 +96,11 @@ background-color:#D6F4FF;
 .category{
 background-color:#E7E6DA;
 }
-
-
 table {
-        table-layout: fixed;
-        width: 100px;
+     
+	   margin-top: 25px;
+        
       }
-
-td {
-        width: 2000px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-  .pagination-link, .pagination-next, .pagination-previous {
-    background-color:#fff;
-    border-color: #000;
-    color: #363636;
-  
-}
 </style>
 
 <title>Pilimon</title>
@@ -168,22 +180,23 @@ td {
 <section class="section">
 
 <div class="">
-<h1 class="title has-text-white is-text-left">Manage User Accounts</h1>
-	<div class="buttons is-right">
+<h1 class="title is-size-4-mobile has-text-white is-text-left-desktop ">Manage User Accounts</h1>
+	<div class="buttons are-small-mobile is-centered ">
 	
-				<a href="#addUserModal" class="button modal-button is-success " data-target = "#addUserModal" ><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Add New Guide</span> </a>
-				<a href="{{route('logs.list')}}" class="button is-link " ><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp; <span>View History Logs</span></a>
+				<a href="#addUserModal" class="button modal-button is-success   is-fullwidth " data-target = "#addUserModal" ><i class="fas fa-plus-square"></i>&nbsp;<span>Add New Guide</span> </a>
+				<a href="{{route('logs.list')}}" class="button is-link  is-fullwidth" ><i class="fas fa-clipboard-list"></i>&nbsp; <span>View History Logs</span></a>
 								
 	</div>
 </div>
    
 </section>
-<section class="section">								
-		<table id="example" class="table is-striped  is-narrow" style="width:100% ">
-			<thead>
+<section class="section has-text-white">								
+		<table id="example" class=" table is-striped " style="width:100%;">
+	
+		<thead>
 				<tr>
-							<th class="has-text-centered" style=" width: 15px;">ID</th>
-							<th style=" width: 100px;">Name</th>
+							<th class="pl-5 has-text-centered" style=" width:25px;">ID</th>
+							<th class ="ml-3" style=" width:25px;">Name</th>
 							<th style=" width: 100px;">Email Address</th>
 							<th class="has-text-centered" style=" width: 20px;">Role</th>
 							<th style=" width: 30px;">Status</th>
@@ -195,8 +208,8 @@ td {
 			<tbody>
 			@foreach($users as $user)
 				<tr>
-					<td class = "pl-5" style=" width: 25px;">{{$user->id}}</td>
-					<td>{{ $user->fname}} {{ $user->lname}}</td>
+					<td class = "has-text-centered" style=" width: 25px;">{{$user->id}}</td>
+					<td class ="ml-3">{{ $user->fname}} {{ $user->lname}}</td>
 					<td>{{ $user->email}}</td>
 					@switch($user->role)
 								@case(1)
@@ -448,9 +461,6 @@ td {
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('#example').DataTable();
-} );
 
 $(".modal-button").click(function() {
           
@@ -471,7 +481,7 @@ $(".modal-button").click(function() {
 $(document).on('click','.edit',function(){
 	
 	var user_id = $(this).data('id');
-	
+
 	$.get("{{ route('get.user')}}" ,{user_id},function(data){
 	$("#editid").val(data.details.id);	
 	$("#editfname").val(data.details.fname);
@@ -480,21 +490,18 @@ $(document).on('click','.edit',function(){
 	$("#editrole").val(data.details.role);
 	$("#editstatus").val(data.details.status);
 	},'json');
-
  
 })
-
-
 $(document).on('click','.delete1',function(){
+	
 	var user_id = $(this).data('id');
+
 	$.get("{{ route('get.user')}}" ,{user_id},function(data){
 	$("#deleteID").val(data.details.id);
 	
 	},'json');
-
  
 })
-
 </script>
 <br><br><br><br><br><br>
 <footer class="footer footer-size">
@@ -508,22 +515,17 @@ Bachelor of Science in Information Technology
 </footer>
 <script>
 $(document).ready(function() {
-
   // Check for click events on the navbar burger icon
   $(".navbar-burger").click(function() {
-
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       $(".navbar-burger").toggleClass("is-active");
       $(".navbar-menu").toggleClass("is-active");
 	
   });
-
 	 $(".navbar-link").click(function() {
-
    
 	$(".navbar-dropdown").toggleClass("is-hidden");
   });
-
 	
 });
 </script>
