@@ -48,13 +48,21 @@
 label{
 color:white;
 }
+
 div.dataTables_wrapper div.dataTables_filter input{
 	margin-bottom:1.0em;
 }
 .dataTables_wrapper .dataTables_length select,
-.dataTables_wrapper .dataTables_filter input{
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_paginate .paginate_button
+{
 background-color:white;
+}
 
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+
+  border:black;
+  background:#3273dc;
 }
 html,
 body{
@@ -101,6 +109,7 @@ table {
 	   margin-top: 25px;
         
       }
+
 </style>
 
 <title>Pilimon</title>
@@ -146,6 +155,7 @@ table {
 					<span class="icon">
 					<i class="material-icons">library_add</i>
 					</span>
+					
 					<strong>Manage Guides</strong>
 			</span> 
 		</a>
@@ -183,7 +193,14 @@ table {
 <h1 class="title is-size-4-mobile has-text-white is-text-left-desktop ">Manage User Accounts</h1>
 	<div class="buttons are-small-mobile is-centered ">
 	
-				<a href="#addUserModal" class="button modal-button is-success   is-fullwidth " data-target = "#addUserModal" ><i class="fas fa-plus-square"></i>&nbsp;<span>Add New Guide</span> </a>
+				<a href="#addUserModal" class="button modal-button is-success   is-fullwidth " data-target = "#addUserModal" >
+				<span class="icon-text">
+					<span class="icon">
+					<i class="material-icons">person_add_alt_1</i>
+					</span>
+					
+					&nbsp;<span>Add New User</span>
+				</span></a>
 				<a href="{{route('logs.list')}}" class="button is-link  is-fullwidth" ><i class="fas fa-clipboard-list"></i>&nbsp; <span>View History Logs</span></a>
 								
 	</div>

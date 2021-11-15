@@ -38,7 +38,11 @@
 		responsive: true,
 		columnDefs: [
         { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 2, targets: -1 }
+        { responsivePriority: 2, targets: -1 },
+		{ responsivePriority: 3},
+        { responsivePriority: 4},
+        { responsivePriority: 5},
+        { responsivePriority: 6}
     ]
 	} );
 } );
@@ -46,6 +50,26 @@
 </script>
 <style>
 
+#example_info,
+label{
+color:white;
+}
+
+div.dataTables_wrapper div.dataTables_filter input{
+	margin-bottom:1.0em;
+}
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_paginate .paginate_button
+{
+background-color:white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+
+  border:black;
+  background:#3273dc;
+}	
 html,
 body{
 		
@@ -92,17 +116,7 @@ background-color:#E7E6DA;
 }
 
 
-table {
-        table-layout: fixed;
-        width: 100px;
-      }
 
-td {
-        width: 2000px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
 
   .pagination-link, .pagination-next, .pagination-previous {
     background-color:#fff;
@@ -222,27 +236,31 @@ td {
 		<table id="example" class="table is-striped  is-narrow" style="width:100% ">
 			<thead>
 				<tr>
-							<th class="has-text-centered" style=" width: 20px;">ID</th>
-							<th>Title</th>
+							<th class="has-text-centered" style=" width: 55px;">ID</th>
+							<th style=" width: 150px;">Title</th>
 							<th style=" width: 100px;">Category</th>
-							<th>Description</th>
+							<th style=" width: 150px;">Description</th>
 							<th style=" width: 100px;">Author</th>
-							<th style=" width: 130px;">Created</th>
-							<th style=" width: 130px;">Updated</th>
-							<th style=" width: 50px;">Actions</th>
+							<th>Views</th>
+							<th>Likes</th>
+							<th style=" width: 100px;">Created</th>
+							<th style=" width: 100px;">Updated</th>
+							<th style=" width: 20px;">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 			@foreach($data as $data)
 				<tr>
-					<td class = "pl-3" style=" width: 25px;">{{$data->id}}</td>
-					<td>{{ $data->title}}</td>
+					<td class = "pl-3 has-text-centered" style=" width: 55px;">{{$data->id}}</td>
+					<td style=" width: 150px;">{{ $data->title}}</td>
 					<td>{{ $data->category}}</td>
 					<td>{{ $data->description}}</td>
 					<td>{{ $data->fname}} {{ $data->lname}}</td>
+					<td>{{ $data->views}}</td>
+					<td>{{ $data->likes}}</td>
 					<td>{{ $data->created_at}}</td>
 					<td>{{ $data->updated_at}}</td>
-					<td><a href="#editGuideModal" class="icon has-text-warning modal-button edit" data-id="{{$data->id}}" id="edit" data-target = "#editGuideModal"><i class="fas fa-edit"></i></a>
+					<td style=" width: 20px;"><a href="#editGuideModal" class="icon has-text-warning modal-button edit" data-id="{{$data->id}}" id="edit" data-target = "#editGuideModal"><i class="fas fa-edit"></i></a>
 						<a href="#deleteGuideModal" class="icon has-text-danger modal-button delete1" data-id="{{$data->id}}"  data-target = "#deleteGuideModal"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			@endforeach				
@@ -390,9 +408,6 @@ td {
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('#example').DataTable();
-} );
 
 $(".modal-button").click(function() {
           

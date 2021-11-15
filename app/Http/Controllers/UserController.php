@@ -28,7 +28,7 @@ class UserController extends Controller
         $logs->user= Auth::id();
         $logs->Action = "Delete comment";
         $logs->Role = "Admin";
-        $logs->Content = "Delete user ID: ".  $id . " with full name: $user  " ;
+        $logs->Content = "Deleted comment: ". " ( " . $comment->comment . " ) " ." from user ID: ".  $id . "User name: " . $user->fname .  " " . $user->lname;
         $logs->save();
         return back();
     }

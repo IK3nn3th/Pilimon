@@ -60,7 +60,7 @@ class AdminController extends Controller
         $logs->user= Auth::id();
         $logs->Action = "Add user";
         $logs->Role = "Admin";
-        $logs->Content = "Added the user ". request('fname') . request('lname') ." guide";
+        $logs->Content = "Added the user ". request('fname') ." ". request('lname') ." guide";
         $logs->save();
 
         return redirect()->route('admin.dashboard'); 
@@ -100,7 +100,7 @@ class AdminController extends Controller
         $logs->user= Auth::id();
         $logs->Action = "Update user";
         $logs->Role = "Admin";
-        $logs->Content = "Updated user information for User ID: ". $request->id. " with full name: " . $request->fname. $request->lname ;
+        $logs->Content = "Updated user information for User ID: ". $request->id. " with full name: " . $request->fname." ". $request->lname ;
         $logs->save();
 
             return redirect()->route('admin.dashboard'); 

@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 
 <!-- Modal HTML -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -17,14 +20,57 @@
 <!-- Javascript-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- Datatable HTML -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	
+	
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bulma.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" class="init">
+	$(document).ready(function() {
+	var table = $('#example').DataTable( {
+		
+		responsive: true,
+		columnDefs: [
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2},
+        { responsivePriority: 3},
+        { responsivePriority: 4},
+        { responsivePriority: 5},
+        { responsivePriority: 6},
+
+    ]
+	} );
+} );
+
+</script>
 
 <style>
 
+#example_info,
+label{
+color:white;
+}
+
+div.dataTables_wrapper div.dataTables_filter input{
+	margin-bottom:1.0em;
+}
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_paginate .paginate_button
+{
+background-color:white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+
+  border:black;
+  background:#3273dc;
+}
 html,
 body{
 		
@@ -69,19 +115,11 @@ background-color:#D6F4FF;
 .category{
 background-color:#E7E6DA;
 }
+table.dataTable>tbody>tr.child ul.dtr-details>li{
+  white-space: break-spaces;
 
-
-table {
-        table-layout: fixed;
-        width: 60px;
-      }
-
-td {
-        width: 2000px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+}
+ 
 
   .pagination-link, .pagination-next, .pagination-previous {
     background-color:#fff;
@@ -191,13 +229,13 @@ td {
    
 </section>
 <div class = "container is-fluid has-text-white">
-            <table class="table table is-striped  is-narrow" id = "example" style="width:100%" >
+            <table class="table  is-striped nowrap is-narrow" id = "example" style="width:100%" >
             <thead>
                     <tr>
                         <th class="has-text-centered" style=" width: 20px;">ID</th>
                         <th style=" width: 100px;">Name</th>	
                         <th style=" width: 70px;">Action</th>
-                        <th>Content</th>
+                        <th>Actions made:</th>
                         <th style=" width: 150px;">Performed on</th>
 
                     </tr>
@@ -205,7 +243,7 @@ td {
                 <tbody>
                 @foreach($data as $data)
                     <tr>
-                        <td>{{$data->id}}</td>
+                        <td class = "has-text-centered" style=" width: 25px;">{{$data->id}}</td>
                         <td>{{ $data->fname}} {{ $data->lname}}</td>
                         <td>{{ $data->Action}}</td>
                         <td>{{ $data->Content}}</td>
@@ -227,11 +265,7 @@ td {
 
 
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
 
 
 <br><br><br><br><br><br>
