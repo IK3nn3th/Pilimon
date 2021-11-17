@@ -43,6 +43,9 @@
 } );
 
 </script>
+
+
+
 <style>
 #example_info,
 label{
@@ -168,6 +171,14 @@ table {
 					<strong>View Guides</strong>
 			</span> 
 		</a>
+		<a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
+        <span class="icon-text">
+            <span class="icon">
+            <i class="fas fa-key"></i>
+            </span>
+            <strong>Change Password</strong>
+        </span> 
+      </a>
     </div>
 
 		<div class="navbar-end">
@@ -175,7 +186,12 @@ table {
 				<div class="buttons">
 				<a href="{{ route('logout') }}" class="button is-danger" onclick="event.preventDefault();
 																document.getElementById('logout-form').submit();">
-													{{ __('Logout') }}
+													    <span class="icon-text">
+															<span class="icon">
+															<i class="material-icons">logout</i>
+															</span>
+															<strong>Log out </strong>
+														</span> 
 												<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 													@csrf 
 								</form></a>
@@ -244,17 +260,107 @@ table {
 					<td>{{ $user->created_at}}</td>
 					<td>{{ $user->updated_at}}</td>
 					<td><a href="#editUserModal" class="icon has-text-warning modal-button edit" data-id="{{$user->id}}" id="edit" data-target = "#editUserModal"><i class="fas fa-edit"></i></a>
-						<a href="#deleteUserModal" class="icon has-text-danger modal-button delete1" data-id="{{$user->id}}"  data-target = "#deleteUserModal"><i class="fas fa-trash-alt"></i></a></td>
-				</tr>
+						<a href="#deleteUserModal" class="icon has-text-danger modal-button delete1" data-id="{{$user->id}}"  data-target = "#deleteUserModal"><i class="fas fa-trash-alt"></i></a>
+						<a href="#resetPassword" class="icon has-text-dark modal-button reset" data-id="{{$user->id}}"  data-target = "#resetPassword"><i class="fas fa-key"></i></a></td>
+					</tr>
 			@endforeach				
 			</tbody>
 			
 		</table>					
 	</div>
+	
 </section>
 
+   <!-- Change password modal -->
+<div id = "Changepassword" class = "modal changepass" id="changepass">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Change Password</p>	  
+					</header>
+						<section class="modal-card-body">
+							<form action="{{route('change.pass')}}" method="POST">
+								@csrf
+								<h5 class="title is-5">Current Password</h5>
+								<input class="input is-success" name="Currentpass" id="Currentpass" value="{{ old('Currentpass') }}" type="password" placeholder="Current Password" required>
+								<br>	<br>
+								<h5 class="title is-5">New Password</h5>
+								<input class="input is-success" name="Newpass" id="Newpass" value="{{ old('Newpass') }}" type="password" placeholder="New Password" required>
+								<br>	<br>
+								<h5 class="title is-5">Confirm New Password</h5>
+								<input class="input is-success" name="ConfirmPass" id="ConfirmPass" value="{{ old('ConfirmPass') }}" type="password" placeholder="Confirm New Password" required>
+								<span class= "text-danger">{{session('error')}}</span>
+						</section>
+					<footer class="modal-card-foot">
+						<input type = "submit" class="button is-success" value="Change Password">
+						<input type="button" class="button is-danger modalclose" data-target = "#addUserModal"  data-dismiss="modal" value="Cancel">
+					</form>	
+				</div>
+					
+	</div>
 
+    <!-- Reset password modal -->
+	<div id = "resetPassword" class = "modal">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<form action="{{route('reset.pass')}}" method="POST">
+							@csrf
+					<input type="text"  hidden name="id" id="resetID" required>
+					<header class="modal-card-head">
+						<p class="modal-card-title">Reset User Password</p>	  
+					</header>
+					<section class="modal-card-body">
+						<p>Are you sure you want to <strong> reset the password</strong>?</p>
+						<p class="text-warning"><small>This action cannot be undone.</small></p>
+					</section>
+					<footer class="modal-card-foot">
+						<input input type="button" class="button is-danger modalclose" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="button is-success" value ="Reset Password">
+					</footer>
+					</form>
+				</div>
+			</div>
+	</div>
+ <!-- Generated password modal -->
 
+ <div id = "Temppassword" class = "modal temp" id="temp">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					
+					<header class="modal-card-head">
+						<p class="modal-card-title">Reset User Password</p>	  
+					</header>
+					<section class="modal-card-body">
+						<p>Here's your temporary password. Please take note of the password since it can't be retrieved anymore once the window is closed</p>
+						<p class="is-size-3 is has-text-centered"><strong>Temporary password: {{session('temppass')}}</strong></p>
+					</section>
+					<footer class="modal-card-foot">
+						<input input type="button" class="button is-danger modalclose" data-dismiss="modal" value="close">
+					</footer>
+					
+				</div>
+			</div>
+</div>
+@if(!empty(session('temppass'))){
+<script>
+$(document).ready(function() {
+	$("html").addClass("is-clipped");
+	$(".temp").addClass("is-active");
+});
+</script>
+}
+@endif
+@if(!empty(session('error'))){
+<script>
+$(document).ready(function() {
+	$("html").addClass("is-clipped");
+	$(".changepass").addClass("is-active");
+});
+</script>
+
+}
+@endif
+								
     <!-- Add  Modal HTML -->
     <div id = "addUserModal" class = "modal">
 			<div class = "modal-background"></div>
@@ -515,6 +621,17 @@ $(document).on('click','.delete1',function(){
 
 	$.get("{{ route('get.user')}}" ,{user_id},function(data){
 	$("#deleteID").val(data.details.id);
+	
+	},'json');
+ 
+})
+
+$(document).on('click','.reset',function(){
+	
+	var user_id = $(this).data('id');
+
+	$.get("{{ route('get.user')}}" ,{user_id},function(data){
+	$("#resetID").val(data.details.id);
 	
 	},'json');
  

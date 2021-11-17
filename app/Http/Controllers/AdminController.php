@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\logs;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,7 +21,8 @@ class AdminController extends Controller
        
         return view('dashboard.admins.index', ['users'=>$user,])
         
-        ->with('name',$name);
+        ->with('name',$name)
+        ->with('temppass',"");
     }
     public function getLogs(Request $request)
     {
@@ -37,7 +38,27 @@ class AdminController extends Controller
             ->with('user',$name);   
         
     }
-    
+    public function resetpass(Request $request)
+    {   
+        $name = Auth::user();
+        $user = User::all();
+        $temppass = Str::random(8);
+        
+       
+        $update = [
+            'password'=> hash::make($temppass)
+           
+
+        ];
+        User::where('id',$request->id)->update($update);
+        
+        
+
+        return redirect()->route('admin.dashboard', ['temppass'=>$temppass,]) 
+        ->with('temppass',$temppass)
+        ->with('name',$name);
+
+    }
     public function store(Request $req){
         $req->validate([
             'fname' => 'required|string|max:255',
@@ -55,7 +76,7 @@ class AdminController extends Controller
         $user->role = request('role');
         $user->status = request('status');
         $user->save();
-        error_log($user);
+       
         $logs = new logs(); 
         $logs->user= Auth::id();
         $logs->Action = "Add user";

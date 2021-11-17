@@ -1,84 +1,76 @@
 
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
   <title>Pilimon</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-  
-  <link rel="stylesheet" href="/css/style.css">
-      
-  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <!-- Bulma CSS -->	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- Bulma Version 0.9.0-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
-<section class="section">
-  <div class="columns">
-    <div class="column is-12-mobile">
-      <div class="login-wrap">
-        <div class="login-html">
-          <label for="tab-1" class="tab">Sign In</label>
-          <div class="login-form">
-            <form class="sign-in-htm" action="{{ route('login') }}" method="POST">
-            @csrf
-            <div>
-            @if(Session::get('error'))
-                        <div class="alert alert-danger" role="alert">
-                            <strong>{{Session::get('error')}}</strong>
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title">PILIMON</h3>
+                    <hr class="login-hr">
+                    <p class="subtitle">Please login to proceed.</p>
+                    <div class="box">
+                        <figure class="avatar">
+                            <img src="images/P.png">
+                        </figure>
+                        <form action= "{{ route('login') }}"  method= "POST" >
+                           @csrf
+                           <div>
+                              @if(Session::get('error'))
+                                          <div class="alert alert-danger" role="alert">
+                                              <strong class= has-text-danger>{{Session::get('error')}}</strong>
+                                              
+                                            </div><br><br>
+                              @endif
                           </div>
-            @endif
+                            <div class="field">
+                                <div class="control">
+                                    <input  name="email"  id="email" class="input is-medium is-success" value="{{ old('email') }}" type="email"   required  autocomplete="email" placeholder="Your Email" autofocus>
+                                </div>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input name="password" id="password" type ="password" class="input is-medium is-success"   required  placeholder="Your Password"  autocomplete="current-password">
+                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            <button type="submit" class="button is-block is-large is-fullwidth has-text-white" >Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                        
+                    </div>
+                    </form>
+                    <p class=" ">
+                        <a class =" title is-4 has-text-white " href="{{route('register')}}">Sign Up</a>
+                    </p>
+                </div>
             </div>
-            <div></br></div>
-          
-              <div class="group">
-                <label for="user" class="label">Email address</label>
-                <input id="email" name="email" type="email" class="input @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                @error('email')
-                  <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-
-              </div>
-
-              <div class="group">
-                <label for="pass" class="label">Password</label>
-                <input id="password" name="password" type="password" class="input @error('password') is-invalid @enderror" data-type="password"  required autocomplete="current-password">
-                @error('password')
-                  <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-
-              
-              </div>
-              <div class="form-group form-check">
-              <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                      <label class="form-check-label" for="remember">
-                          {{ __('Remember Me') }}
-                      </label>
-              </div>
-              <div class="group">
-                <input type="submit" class="button" value="Sign In">
-              </div>
-              </br>
-              <div class="foot-lnk">
-                <a href="#forgot">Forgot Password?</a>
-              </div>
-              <div class="hr"></div>
-
-              <div class="foot-lnk">
-                <a href="{{route('register')}}">Not yet registered? Sign up!</a>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>  
-  
+    </section>
+   
 </body>
+
 </html>

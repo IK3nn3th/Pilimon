@@ -199,6 +199,15 @@ background-color:#E7E6DA;
 			</span> 
 		</a>
     @endif
+	<a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
+        <span class="icon-text">
+            <span class="icon">
+            <i class="fas fa-key"></i>
+            </span>
+            <strong>Change Password</strong>
+        </span> 
+      
+      </a>
     </div>
 
     <div class="navbar-end">
@@ -206,7 +215,12 @@ background-color:#E7E6DA;
         <div class="buttons">
           <a href="{{ route('logout') }}" class="button is-danger" onclick="event.preventDefault();
 														document.getElementById('logout-form').submit();">
-											{{ __('Logout') }}
+											    <span class="icon-text">
+													<span class="icon">
+													<i class="material-icons">logout</i>
+													</span>
+													<strong>Log out </strong>
+												</span> 
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
 											@csrf 
 						</form></a>
@@ -268,8 +282,45 @@ background-color:#E7E6DA;
 			
 		</table>					
 	</div>
+  <!-- Change password modal -->
+	<div id = "Changepassword" class = "modal changepass" id="changepass">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Change Password</p>	  
+					</header>
+						<section class="modal-card-body">
+							<form action="{{route('change.pass')}}" method="POST">
+								@csrf
+								<h5 class="title is-5">Current Password</h5>
+								<input class="input is-success" name="Currentpass" id="Currentpass" value="{{ old('Currentpass') }}" type="password" placeholder="Current Password" required>
+								<br>	<br>
+								<h5 class="title is-5">New Password</h5>
+								<input class="input is-success" name="Newpass" id="Newpass" value="{{ old('Newpass') }}" type="password" placeholder="New Password" required>
+								<br>	<br>
+								<h5 class="title is-5">Confirm New Password</h5>
+								<input class="input is-success" name="ConfirmPass" id="ConfirmPass" value="{{ old('ConfirmPass') }}" type="password" placeholder="Confirm New Password" required>
+								<span class= "text-danger">{{session('error')}}</span>
+						</section>
+					<footer class="modal-card-foot">
+						<input type = "submit" class="button is-success" value="Change Password">
+						<input type="button" class="button is-danger modalclose" data-target = "#addUserModal"  data-dismiss="modal" value="Cancel">
+					</form>	
+				</div>
+					
+	</div>
+	
+@if(!empty(session('error'))){
+<script>
+$(document).ready(function() {
+	$("html").addClass("is-clipped");
+	$(".changepass").addClass("is-active");
+});
+</script>
 
-
+}
+@endif
+		
 
     <!-- Add  Modal HTML -->
     <div id = "addGuideModal" class = "modal">

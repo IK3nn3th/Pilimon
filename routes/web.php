@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\PasswordController;
 
 use Illuminate\Support\Facades\Auth; 
 /*
@@ -30,6 +31,7 @@ Route::post('/admin/adduser', [AdminController::class,'store'])->name('add.user'
 Route::post('/admin/edituser', [AdminController::class,'EditUser'])->name('edit.user');
 Route::delete('/admin/delete', [AdminController::class,'destroy'])->name('delete.user');
 Route::get('/admin/adminlogs', [AdminController::class, 'getLogs'])->name('admin.logs');
+Route::post('/admin/resetpass', [AdminController::class,'resetpass'])->name('reset.pass');
 
 
 //Public Manager routes
@@ -52,6 +54,7 @@ Route::post('/guide/{slug}/like',[CommentController::class, 'savelike'])->name('
 //Public Search routes
 Route::get('/search',[SearchController::class,'search'])->name('web.search');
 
+Route::post('/changepass',[PasswordController::class,'changepassword'])->name('change.pass');
 
 //Private Group Routes
 Route::group(['prefix'=>'admin', 'middleware' =>['isAdmin','auth']], function(){

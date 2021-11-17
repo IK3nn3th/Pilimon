@@ -18,8 +18,7 @@ class UserController extends Controller
         ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
         ->orderby('guides.updated_at', 'DESC')->paginate(6));
     }
-
-   
+  
     public function deletecomment($id){
         $user = Auth::user();
         $comment= comments::findorfail($id);
