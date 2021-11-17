@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class PasswordController extends Controller
 {
     public function changepassword(Request $req){
     $user = User::findorfail(Auth::id());
