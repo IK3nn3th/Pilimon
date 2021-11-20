@@ -43,7 +43,7 @@
                               <div class="field">
                                 <div class="control">
                                   <p>First Name</p>          
-                                  <input id="fname" type="text" class="input @error('name') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
+                                  <input id="fname" type="text" class="input @error('name') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" placeholder="First name" autofocus>
 
                                       @error('fname')
                                           <span class="invalid-feedback" role="alert">
@@ -55,7 +55,7 @@
                               <div class="field">
                                 <div class="control">
                                   <p>Last Name</p>          
-                                  <input id="lname" type="text" class="input @error('name') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
+                                  <input id="lname" type="text" class="input @error('name') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" placeholder="Last name"  autofocus>
                                       @error('lname')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
                               <div class="field">
                                 <div class="control">
                                   <p>Email Address</p>          
-                                  <input id="email" name="email" type="email" class="input  @error('email') is-invalid @enderror" value= "{{ old('email') }}" required autocomplete="email">
+                                  <input id="email" name="email" type="email" class="input  @error('email') is-invalid @enderror" value= "{{ old('email') }}" required placeholder="Email Address" autocomplete="email">
                                    @error('email')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                               <div class="field">
                                 <div class="control">
                                   <p>Password</p>          
-                                  <input id="password" name="password" type="password" class="input @error('password') is-invalid @enderror" data-type="password"  required autocomplete="new-password">
+                                  <input id="password" name="password" type="password" class="input @error('password') is-invalid @enderror" data-type="password" placeholder="Password" required autocomplete="new-password">
                                   @error('password')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -88,7 +88,7 @@
                               <div class="field">
                                 <div class="control">
                                   <p>Confirm Password</p>          
-                                  <input id="password_confirmation" name="password_confirmation" type="password" class="input @error('password') is-invalid @enderror" data-type="password"  required autocomplete="new-password">
+                                  <input id="password_confirmation" name="password_confirmation" type="password" class="input @error('password') is-invalid @enderror" data-type="password" placeholder="Confirm Password" required autocomplete="new-password">
                                  
                                 </div>
                               </div>
@@ -102,7 +102,7 @@
                             </form>
                     </div>
                   <p class="has-text-white has-text-centered">
-                    <a href="{{route('login')}}">Already Member? Sign in here!</a>
+                    <a class = "subtitle has-text-white" href="{{route('login')}}">Already Member? Sign in here!</a>
                   </p>
                 </div>
             </div>

@@ -65,13 +65,8 @@
                         
                     </div>
                     </form>
-                    <p class=" ">
-                        <a class ="button is-block is-large is-fullwidth is-info has-text-white" href="{{route('register')}}"><span class="icon-text">
-					<span class="icon">
-                    <strong>Sign up </strong>&nbsp;
-					<i class="material-icons">border_color</i>
-                        </span> 
-                        </span></a>
+                    <p class="has-text-centered ">
+                        <a class =" subtitle has-text-white" href="{{route('register')}}">Not yet a registered? Sign up! </a>
                     </p>
                 </div>
             </div>
