@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 
   <title>Pilimon</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
@@ -20,12 +22,12 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
-                    <h3 class="title">PILIMON</h3>
+                    <h3 class="title is-size-3-mobile is-size-1-desktop">PILIMON</h3>
                     <hr class="login-hr">
-                    <p class="subtitle">Please login to proceed.</p>
+                    <p class="subtitle has-text-centered has-text-white">Please login to proceed.</p>
                     <div class="box">
                         <figure class="avatar">
-                            <img src="images/P.png">
+                            <img src="/images/P.png">
                         </figure>
                         <form action= "{{ route('login') }}"  method= "POST" >
                            @csrf
@@ -64,7 +66,12 @@
                     </div>
                     </form>
                     <p class=" ">
-                        <a class =" title is-4 has-text-white " href="{{route('register')}}">Sign Up</a>
+                        <a class ="button is-block is-large is-fullwidth is-info has-text-white" href="{{route('register')}}"><span class="icon-text">
+					<span class="icon">
+                    <strong>Sign up </strong>&nbsp;
+					<i class="material-icons">border_color</i>
+                        </span> 
+                        </span></a>
                     </p>
                 </div>
             </div>

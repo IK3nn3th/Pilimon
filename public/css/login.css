@@ -3,10 +3,18 @@ html,body {
   font-size: 14px;
   font-weight: 300;
 }
-
+.title{ 
+	font-family: 'Oswald'; 
+	color: #C9DF8A;
+	font-weight: bold;
+	letter-spacing: 18px;
+	text-shadow: 3px 3px black;
+	text-align: center; 
+	text-transform: uppercase; 
+}
 .hero {
   
-  background-image: linear-gradient(rgb(119, 171, 89, 0.5), rgb(35, 77, 32, 0.8)),url("../images/pilimon1.jpg");  
+  background-image: linear-gradient(rgb(119, 171, 89, 0.5), rgb(35, 77, 32, 0.8)),url("/images/pilimon1.jpg");  
   background-position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -14,7 +22,7 @@ html,body {
 }
 @media only screen and (max-width: 600px) {
         .hero {
-          background-image: linear-gradient(rgb(119, 171, 89, 0.5), rgb(35, 77, 32, 0.8)),url("../images/pilimon1.jpg");
+          background-image: linear-gradient(rgb(119, 171, 89, 0.5), rgb(35, 77, 32, 0.8)),url("/images/pilimon1.jpg");
 		  background-position: center center;
 		  background-attachment: fixed;
 		  background-repeat: no-repeat;
@@ -52,7 +60,6 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
-
 .login-hr{
   border-bottom: 1px solid black;
 }
@@ -64,7 +71,9 @@ p.subtitle {
 .field{
   padding-bottom: 10px;
 }
-
+.field, p{
+	text-align: left; 
+}
 .fa{
   margin-left: 5px; 
 }

@@ -279,7 +279,7 @@ table {
 						<p class="modal-card-title">Change Password</p>	  
 					</header>
 						<section class="modal-card-body">
-							<form action="{{route('change.pass')}}" method="POST">
+							<form action="{{ route('change.pass')}}" method="POST">
 								@csrf
 								<h5 class="title is-5">Current Password</h5>
 								<input class="input is-success" name="Currentpass" id="Currentpass" value="{{ old('Currentpass') }}" type="password" placeholder="Current Password" required>
