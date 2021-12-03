@@ -51,7 +51,7 @@ class LoginController extends Controller
 
     public function login(Request $request){
         $input = $request->all();
-       error_log($request->password);
+   
         $this -> validate($request,[
             'email'=>'required|email',
             'password'=>'required'

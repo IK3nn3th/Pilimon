@@ -596,6 +596,7 @@ $(".modal-button").click(function() {
 		 $(".modalclose").click(function() {
          
             $(".modal").removeClass("is-active");
+			$("html").removeClass("is-clipped");
          });
 </script>
 

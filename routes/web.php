@@ -41,7 +41,7 @@ Route::post('/manager/updateGuide',[ManagerController::class, 'GuideUpdate'])->n
 Route::delete('/manager/DeleteGuide',[ManagerController::class, 'deleteGuide'])->name('guides.delete');
 Route::get('/manager/dashboard', [ManagerController::class,'index'])->name('manager.dashboard');
 Route::get('/manager/historylogs', [ManagerController::class, 'getLogs'])->name('logs.list');
-
+Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
 //Public User routes
 Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
 Route::get('user/dashboard', [UserController::class,'index'])->name('user.dashboard');   
@@ -75,7 +75,7 @@ Route::group(['prefix'=>'manager', 'middleware' =>['isManager','auth']], functio
 
     Route::get('guide', [UserController::class,'index'])->name('manager.guides');
     Route::get('settings', [ManagerController::class,'settings'])->name('manager.settings');
-    Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
+  
     Route::get('/guide/{slug}', [UserController::class,'show'])->name('manager.show');
 });
 

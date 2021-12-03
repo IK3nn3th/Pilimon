@@ -471,6 +471,7 @@ $(".modal-button").click(function() {
 		 $(".modalclose").click(function() {
          
             $(".modal").removeClass("is-active");
+			$("html").removeClass("is-clipped");
          });
 </script>
 
@@ -479,14 +480,16 @@ $(".modal-button").click(function() {
 $(document).on('click','.edit',function(){
 	
 	var guide_id = $(this).data('id');
-	
+
 	$.get("{{ route('guides.details')}}" ,{guide_id},function(data){
 	$("#eid").val(data.details.id);
+	
 	$("#etitle").val(data.details.title);
 	$("#ecategory").val(data.details.category);
 	$("#edesc").val(data.details.description);
 	$("#econtent").val(data.details.content);
 	},'json');
+
 
  
 })
