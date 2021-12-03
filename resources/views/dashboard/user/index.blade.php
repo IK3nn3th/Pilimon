@@ -67,8 +67,11 @@
                 @endforeach		
             </div>
         </div>
-			
+		<div class="section">
+		{{$guides->links('vendor.pagination.bulma-simple')}}	
+		</div>
+		
 <div> 
-{{$guides->links()}}
+
 </div>
 @endsection

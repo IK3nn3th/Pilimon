@@ -76,8 +76,11 @@
             </div>
         </div>
 			
-<div> 
-{{$guides->links()}}
+  </div> 
+  <div class="section">
+		{{$guides->links('vendor.pagination.bulma-simple')}}	
+		</div>
+
 </div>
 
 @endsection

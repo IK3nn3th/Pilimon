@@ -28,6 +28,11 @@
 
 <style>
 
+.pagination-next, .pagination-previous {
+  background-color: white;
+  color:black;
+}
+
 html,
 body{
 		
