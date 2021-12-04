@@ -76,6 +76,7 @@ class ManagerController extends Controller
         $data = logs::join('users','users.id','=','logs.user')
         ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
         ->where('logs.role','Manager')
+
         ->get();
             return view('dashboard.manager.logs')
             ->with('data',$data)
@@ -85,6 +86,7 @@ class ManagerController extends Controller
     elseif(Auth::user()->role==1){
         $data = logs::join('users','users.id','=','logs.user')
         ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
+        
         ->get();
         return view('dashboard.manager.logs')
             ->with('data',$data)
@@ -94,13 +96,7 @@ class ManagerController extends Controller
         
     }
 
-    public function getGuides(Request $request)
-    {
-      
-        
-        
-    }
-
+   
 
     public function getDetails(Request $request){
             $guide_id = $request->guide_id;

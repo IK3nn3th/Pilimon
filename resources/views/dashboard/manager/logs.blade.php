@@ -33,7 +33,7 @@
 <script type="text/javascript" class="init">
 	$(document).ready(function() {
 	var table = $('#example').DataTable( {
-		
+		"order": [[ 4, "desc" ]],
 		responsive: true,
 		columnDefs: [
         { responsivePriority: 1, targets: 0 },
@@ -44,6 +44,7 @@
         { responsivePriority: 6},
 
     ]
+
 	} );
 } );
 
