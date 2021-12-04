@@ -66,7 +66,7 @@
                     </div>
                     </form>
                     <p class="has-text-centered ">
-                        <a class =" subtitle has-text-white" href="{{route('register')}}">Not yet a registered? Sign up! </a>
+                        <a class =" subtitle has-text-white" href="{{route('register')}}">Not yet registered? Sign up! </a>
                     </p>
                 </div>
             </div>
