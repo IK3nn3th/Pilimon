@@ -44,7 +44,7 @@
                     </div>
                 <div class="level-item has-text-centered">
                     <div>
-                        <form action="/guide/{{$guides->id}}/like" method = "POST">
+                        <form action="/user/guide/{{$guides->id}}/like" method = "POST">
                             @csrf 
                             <button name= "submit" class="button is-size-3-desktop is-size-6-mobile buttons is-centered">
                                 Very helpful
@@ -72,7 +72,7 @@
                             </div>
                    
                             <div class = "column">
-                                <form action="/guide/{{$guides->id}}/comments" method = "POST" class="mb-0"> 
+                                <form action="/user/guide/{{$guides->id}}/comments" method = "POST" class="mb-0"> 
                                 @csrf
                                 <textarea name= "comment" class = "textarea is-success" placeholder="Write your comment here" required></textarea>
                                 <button name= "submit" class = "mt-4 button is-success is-fullwidth is-rounded is-normal buttons is-centered ">  Post </button>
@@ -106,7 +106,7 @@
                                 </article>
                                 @if(Auth::user()->id === $comment->UserID || Auth::user()->role <=2)
                                     <div class="buttons is-centered">
-                                            <form action="/comments/{{$comment->id}}" method = "POST">
+                                            <form action="/user/comments/{{$comment->id}}" method = "POST">
                                                 @csrf 
                                                 <button name= "submit" class="button is-small has-background-danger">
                                                    <p> DELETE COMMENT</p>

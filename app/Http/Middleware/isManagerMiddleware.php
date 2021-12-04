@@ -20,7 +20,11 @@ class isManagerMiddleware
 
         if ( Auth::check() && Auth::user()->role==2 ){
             return $next($request);
-        }else{
+        }
+        elseif( Auth::check() && Auth::user()->role==1 ){
+            return $next($request);
+        }
+        else{
             return redirect()->route('login');
         }
     }
