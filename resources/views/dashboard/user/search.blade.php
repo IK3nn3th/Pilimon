@@ -6,7 +6,7 @@
             <div class= "column is-12-desktop">
                 <form action="{{ route('web.search') }}" method="GET">
                     @csrf
-                    <input class="input" type="text" name="query"  value="{{ request()->input('query') }}" placeholder="Search here...">
+                    <input class="input" type="text" name="search"  value="{{ request()->input('query') }}" placeholder="Search here...">
                   
                     <button type ="submit" class=" mt-4 button is-success is-rounded is-fullwidth buttons is-centered" >
                       Search
@@ -20,7 +20,7 @@
     <div class = "title">
 		<center>
 				<h1 class = "title is-size-1-desktop ">
-				Search results for "{{ request()->input('query')}}"
+				Search results for "{{ request()->input('search')}}"
 				</h1>
 		</center>
 	    </div>

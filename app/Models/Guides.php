@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Laravel\Scout\Searchable;
+
 class Guides extends Model
 {
-    use HasFactory;
-    use Sluggable;
+    use HasFactory, Sluggable, Searchable;
     public $timestamps = false;
     protected $fillable = [
         'title',
