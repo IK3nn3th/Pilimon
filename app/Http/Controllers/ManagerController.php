@@ -76,7 +76,6 @@ class ManagerController extends Controller
         $data = logs::join('users','users.id','=','logs.user')
         ->select('logs.id','users.fname','users.lname','logs.Action','logs.Content','logs.created_at')
         ->where('logs.role','Manager')
-
         ->get();
             return view('dashboard.manager.logs')
             ->with('data',$data)

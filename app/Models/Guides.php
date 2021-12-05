@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Laravel\Scout\Searchable;
+use Illuminate\Notifications\Notifiable;
 
 class Guides extends Model
 {
-    use HasFactory, Sluggable, Searchable;
+    use HasFactory, Sluggable, Searchable,Notifiable;
     public $timestamps = false;
     protected $fillable = [
         'title',
@@ -28,7 +29,7 @@ class Guides extends Model
         ];
 
     }
-    public function author(){
+    public function User(){
         return $this->belongsTo(User::class);
     }
    
@@ -36,4 +37,6 @@ class Guides extends Model
 
         return $this->hasMany(comments::class);
     }
+    
+
 }

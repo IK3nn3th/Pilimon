@@ -41,7 +41,7 @@
 							</div>
 							<div class="media-content">
 							  <p class="title is-size-4-desktop is-size-6-mobile"> {{$guide->title}}</p>
-							  <p class="subtitle is-size-6-mobile"><b>Author: {{ $guide->fname}} {{ $guide->lname}}</b></p>
+						
 							</div>
 						  </div>          
 						</div>

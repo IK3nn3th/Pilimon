@@ -10,7 +10,9 @@ class SearchController extends Controller
         $user = Auth::user();
         
         if ($req->has('search')){
-            $guides = Guides::search($req->search)->paginate(6);
+            $guides = Guides::search($req->search)
+            ->paginate(6);
+          
         }
         else{
             $guides = Guides:: paginate(6);
