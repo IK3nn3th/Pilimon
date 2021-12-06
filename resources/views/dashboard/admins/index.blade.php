@@ -369,7 +369,7 @@ $(document).ready(function() {
 						<p class="modal-card-title">Add User Form</p>	  
 					</header>
 						<section class="modal-card-body">
-							<form action="/admin/adduser" method="POST">
+							<form action="{{route('add.user')}}" method="POST">
 								@csrf
 								<div class="columns">
 									<div class="column is-6">
