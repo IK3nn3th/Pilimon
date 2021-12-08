@@ -30,8 +30,8 @@ class ManagerController extends Controller
 
     public function SaveGuide(Request $req){
      
-        $req->validate([
-            'title'=>'required',
+        $validator= $req->validateWithBag('add',[
+            'title'=>'required|max:255|unique:guides',
             'category'=>'required',
             'desc'=>'required',
             'content'=>'required'
@@ -57,7 +57,7 @@ class ManagerController extends Controller
         $logs->Role = "Manager";
         $logs->Content = "Created ". request('title') . " guide";
         $logs->save();
-        return redirect()->route('manager.dashboard'); 
+        return redirect()->route('manager.dashboard')->withErrors($validator, 'add');; 
         
         
     }
@@ -106,6 +106,14 @@ class ManagerController extends Controller
     }
     
     public function GuideUpdate(Request $request){
+       $validator =  $request->validateWithBag('update',[
+            'title'=>'required|max:255|unique:guides',
+            'category'=>'required',
+            'desc'=>'required',
+            'content'=>'required'
+        ]);
+        $test  = $request->title;
+     
         $guide_id = $request->id;
         $guideDetails = Guides::find($guide_id);
         $guideDetails->updated_at= Carbon::now();
@@ -120,10 +128,10 @@ class ManagerController extends Controller
         $logs->user= Auth::id();
         $logs->Action = "Update";
         $logs->Role = "Manager";
-        $logs->Content = "Updated guide ID: ".  $request->id . " with title: " .$request->title;
+        $logs->Content = "Updated guide ID: ".  $request->id . " with title: " . $request->title;
         $logs->save();
         
-        return redirect()->route('manager.dashboard');   
+        return redirect()->route('manager.dashboard')->withErrors($validator, 'update');   
     }
     public function deleteGuide(Request $request){
         

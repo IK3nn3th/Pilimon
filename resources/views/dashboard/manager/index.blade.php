@@ -323,11 +323,12 @@ $(document).ready(function() {
 		
 
     <!-- Add  Modal HTML -->
-    <div id = "addGuideModal" class = "modal">
+    <div id = "addGuideModal" class = "modal addguide">
 			<div class = "modal-background"></div>
 				<div class="modal-card">
 					<header class="modal-card-head">
-						<p class="modal-card-title">Add Guide Form</p>	  
+						<p class="modal-card-title">Add Guide Form </p>	
+						
 					</header>
 						<section class="modal-card-body">
 							<form action="{{route('guides.add')}}" method="POST">
@@ -335,11 +336,16 @@ $(document).ready(function() {
 								<h5 class="title is-5">Title</h5>
 							
 								<input class="input is-success" name="title" id="title" value="{{ old('title') }}" type="text" placeholder="Input Title" required>
-									@error('title')
-								
-									<em class="text-danger"> {{ $message }}</em>
+									@if(!empty( $errors->add->has('title')  ))
+									<script>
+										$(document).ready(function() {
+											$("html").addClass("is-clipped");
+											$(".addguide").addClass("is-active");
+										});
+									</script>
+									<em class="has-text-danger"> {{ $errors->add->first('title') }}</em>
 									
-									@enderror
+									@endif
 									<br><br>
 								<h5 class="title is-5">Category</h5>
 									<input class="input is-success" name="category" id="category" value="{{ old('category') }}" type="text" placeholder="Input Category" required>
@@ -358,7 +364,7 @@ $(document).ready(function() {
 									@enderror
 									<br><br>
 								<h5 class="title is-5">Content</h5>
-									<textarea class="textarea is-success" name="content" id="content" value="{{ old('content') }}"  type="text" placeholder="Input Content" required></textarea>
+									<textarea class="textarea is-success" name="content" id="content" value= "{{ old('content') }}"  type="text" placeholder="Input Content" required></textarea>
 									@error('content')
 								
 										<em class="text-danger"> {{ $message }}</em>
@@ -375,7 +381,7 @@ $(document).ready(function() {
 	</div>
     
     <!-- Edit Modal HTML -->
-	<div id = "editGuideModal" class = "modal">
+	<div id = "editGuideModal" class = "modal editguide">
 			<div class = "modal-background"></div>
 				<div class="modal-card">
 					<header class="modal-card-head">
@@ -388,11 +394,16 @@ $(document).ready(function() {
 								<h5 class="title is-5">Title</h5>
 							
 								<input class="input is-success" name="title" id="etitle" value="{{ old('title') }}" type="text" placeholder="Input Title" required>
-									@error('title')
-								
-									<em class="text-danger"> {{ $message }}</em>
+								@if(!empty( $errors->update->has('title')  ))
+									<script>
+										$(document).ready(function() {
+											$("html").addClass("is-clipped");
+											$(".editguide").addClass("is-active");
+										});
+									</script>
+									<em class="has-text-danger"> {{ $errors->update->first('title') }}</em>
 									
-									@enderror
+									@endif
 									<br><br>
 								<h5 class="title is-5">Category</h5>
 									<input class="input is-success" name="category" id="ecategory" value="{{ old('category') }}" type="text" placeholder="Input Category" required>

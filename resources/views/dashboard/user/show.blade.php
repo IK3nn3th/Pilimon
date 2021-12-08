@@ -52,6 +52,12 @@
                         </form>
                     </div>
                 </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Total Likes</p>
+                        <p class="title">{{$guides->likes}}</p>
+                    </div>
+                </div>
             </card>
         </div>
   
@@ -61,7 +67,23 @@
 
 
     <!--Comment Section-->
+   
+<script>
+var text_max = 200;
+$(document).ready(function() {
 
+$('#count_message').html('0 / ' + text_max );
+
+
+$('#comment').keyup(function() {
+  var text_length = $('#comment').val().length;
+  var text_remaining = text_max - text_length;
+  
+  $('#count_message').html(text_length + ' / ' + text_max);
+});
+
+});
+</script>
 
         <div class="container">
             
@@ -71,11 +93,15 @@
                           
                             </div>
                    
-                            <div class = "column">
+                            <div class = "column  has-text-right">
                                 <form action="/user/guide/{{$guides->id}}/comments" method = "POST" class="mb-0"> 
                                 @csrf
-                                <textarea name= "comment" class = "textarea is-success" placeholder="Write your comment here" required></textarea>
-                                <button name= "submit" class = "mt-4 button is-success is-fullwidth is-rounded is-normal buttons is-centered ">  Post </button>
+                                <textarea name= "comment" id="comment" style = " resize: none;" class = "textarea is-success" placeholder="Write your comment here" maxlength="200" rows="5" required></textarea>
+                                @if(!empty( $errors->add->has('comment')  ))
+                                <em class="has-text-danger "> {{ $errors->add->first('comment') }}</em>
+                                @endif
+                                <span class = "has-text-white" id="count_message">  </span>
+                                <button name= "submit" class = "mt-4 button is-success is-fullwidth is-rounded is-normal buttons is-centered "> Post </button>
                             </form>
                             </div>
                     <div class = "column">

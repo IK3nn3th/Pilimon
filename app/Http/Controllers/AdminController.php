@@ -60,7 +60,7 @@ class AdminController extends Controller
 
     }
     public function store(Request $req){
-        $req->validate([
+        $validator = $req->validateWithBag('add',[
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -83,8 +83,8 @@ class AdminController extends Controller
         $logs->Role = "Admin";
         $logs->Content = "Added the user ". request('fname') ." ". request('lname') ." guide";
         $logs->save();
-
-        return redirect()->route('admin.dashboard'); 
+        error_log($validator);
+        return redirect()->route('admin.dashboard')->withErrors($validator, 'add'); 
         
         
     }
@@ -98,7 +98,7 @@ class AdminController extends Controller
 }
 
     public function EditUser(Request $request){
-        $request->validate([
+       $validator =  $request->validateWithBag('Update',[
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -124,7 +124,7 @@ class AdminController extends Controller
         $logs->Content = "Updated user information for User ID: ". $request->id. " with full name: " . $request->fname." ". $request->lname ;
         $logs->save();
 
-            return redirect()->route('admin.dashboard'); 
+            return redirect()->route('admin.dashboard')->withErrors($validator, 'update'); ; 
         
         
     }

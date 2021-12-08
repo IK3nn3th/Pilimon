@@ -207,6 +207,7 @@ table {
 
 <div class="">
 <h1 class="title is-size-4-mobile has-text-white is-text-left-desktop ">Manage User Accounts</h1>
+	 
 	<div class="buttons are-small-mobile is-centered ">
 	
 				<a href="#addUserModal" class="button modal-button is-success   is-fullwidth " data-target = "#addUserModal" >
@@ -362,7 +363,7 @@ $(document).ready(function() {
 @endif
 								
     <!-- Add  Modal HTML -->
-    <div id = "addUserModal" class = "modal">
+    <div id = "addUserModal" class = "modal adduser">
 			<div class = "modal-background"></div>
 				<div class="modal-card">
 					<header class="modal-card-head">
@@ -375,17 +376,27 @@ $(document).ready(function() {
 									<div class="column is-6">
 										<h5 class="title is-5">First Name</h5>
 										<input class="input is-success" name="fname" id="fname" value="{{ old('fname') }}" type="text" placeholder="First Name" required>
-											@error('fname')
-										
-											<em class="text-danger"> {{ $message }}</em>
+										@if(!empty( $errors->add->has('fname')  ))
+											<script>
+												$(document).ready(function() {
+													$("html").addClass("is-clipped");
+													$(".adduser").addClass("is-active");
+												});
+											</script>
+											<em class="text-danger"> {{ $errors->add->first('fname') }}</em>
 											
-											@enderror
+											@endif
 									</div>
 									<div class="column is-6">
 										<h5 class="title is-5">Last Name</h5>
 										<input class="input is-success" name="lname" id="lname" value="{{ old('lname') }}" type="text" placeholder="Last Name" required>
 											@error('lname')
-										
+											<script>
+												$(document).ready(function() {
+													$("html").addClass("is-clipped");
+													$(".adduser").addClass("is-active");
+												});
+											</script>
 											<em class="text-danger"> {{ $message }}</em>
 											
 											@enderror
@@ -393,16 +404,28 @@ $(document).ready(function() {
 								</div>
 								<h5 class="title is-5">Email Address</h5>
 								<input class="input is-success" name="email" id="email" value="{{ old('email') }}" type="text" placeholder="Email Address" required>
-									@error('email')
-								
-									<em class="text-danger"> {{ $message }}</em>
+								@if(!empty( $errors->add->has('email')  ))
+									<script>
+										$(document).ready(function() {
+											$("html").addClass("is-clipped");
+											$(".adduser").addClass("is-active");
+										});
+									</script>
+
+					
+									<em class="has-text-danger"> {{ $errors->add->first('email') }}</em>
 									
-									@enderror
+									@endif
 									<br><br>
 								<h5 class="title is-5">Password</h5>
 								<input class="input is-success" name="password" id="password" value="{{ old('password') }}" type="password" placeholder="Password" required>
 									@error('pass')
-								
+									<script>
+										$(document).ready(function() {
+											$("html").addClass("is-clipped");
+											$(".adduser").addClass("is-active");
+										});
+									</script>
 									<em class="text-danger"> {{ $message }}</em>
 									
 									@enderror
@@ -416,7 +439,7 @@ $(document).ready(function() {
 												<div class="control is-expanded">
 													<div class="select is-success" >
 														<select name="role" id="role" value="{{ old('role') }}" type="text" required>
-															<option>Select dropdown</option>
+														
 															<option value="3">Student</option>
 															<option value="2">Manager</option>
 															<option value="1">Admin</option>
@@ -436,7 +459,7 @@ $(document).ready(function() {
 													<div class="control is-expanded">
 														<div class="select is-success" >
 															<select name="status" id="status" value="{{ old('status') }}" type="text"  required>
-																<option>Select dropdown</option>
+																
 																<option value="active">Active</option>
 																<option value="inactive">Inactive</option>						
 															</select>
@@ -457,11 +480,14 @@ $(document).ready(function() {
 						<input type="button" class="button is-danger modalclose" data-target = "#addUserModal"  data-dismiss="modal" value="Cancel">
 					</form>	
 				</div>
+			
+    
 					
 	</div>
-    
+
+
     <!-- Edit Modal HTML -->
-	<div id = "editUserModal" class = "modal">
+	<div id = "editUserModal" class = "modal edituser">
 			<div class = "modal-background"></div>
 				<div class="modal-card">
 					<header class="modal-card-head">
@@ -476,7 +502,12 @@ $(document).ready(function() {
 										<h5 class="title is-5">First Name</h5>
 										<input class="input is-success" name="fname" id="editfname" value="{{ old('fname') }}" type="text" placeholder="First Name" required>
 											@error('fname')
-										
+											<script>
+												$(document).ready(function() {
+													$("html").addClass("is-clipped");
+													$(".edituser").addClass("is-active");
+												});
+											</script>
 											<em class="text-danger"> {{ $message }}</em>
 											
 											@enderror
@@ -485,23 +516,20 @@ $(document).ready(function() {
 										<h5 class="title is-5">Last Name</h5>
 										<input class="input is-success" name="lname" id="editlname" value="{{ old('lname') }}" type="text" placeholder="Last Name" required>
 											@error('lname')
-										
+											<script>
+												$(document).ready(function() {
+													$("html").addClass("is-clipped");
+													$(".edituser").addClass("is-active");
+												});
+											</script>
 											<em class="text-danger"> {{ $message }}</em>
 											
 											@enderror
 									</div>
 								</div>
 								<h5 class="title is-5">Email Address</h5>
-								<input class="input is-success" name="email" id="editemail" value="{{ old('email') }}" type="text" placeholder="Email Address" required>
-									@error('email')
-								
-									<em class="text-danger"> {{ $message }}</em>
-									
-									@enderror
-									<br><br>
-								
-
-
+								<p class="subtitle is-6 has-text-weight-bold" id = "editemail"> </p>
+							
 								<div class="columns">
 									<div class="column is-6">
 										<div class="field ">
@@ -509,7 +537,7 @@ $(document).ready(function() {
 												<div class="control is-expanded">
 													<div class="select is-success" >
 														<select name="role" id="editrole" value="{{ old('role') }}" type="text" required>
-															<option>Select dropdown</option>
+															
 															<option value="3">Student</option>
 															<option value="2">Manager</option>
 															<option value="1">Admin</option>
@@ -529,7 +557,7 @@ $(document).ready(function() {
 													<div class="control is-expanded">
 														<div class="select is-success" >
 															<select name="status" id="editstatus" value="{{ old('status') }}" type="text"  required>
-																<option>Select dropdown</option>
+																
 																<option value="active">Active</option>
 																<option value="inactive">Inactive</option>						
 															</select>
@@ -610,7 +638,7 @@ $(document).on('click','.edit',function(){
 	$("#editid").val(data.details.id);	
 	$("#editfname").val(data.details.fname);
 	$("#editlname").val(data.details.lname);
-	$("#editemail").val(data.details.email);
+	$("#editemail").text(data.details.email);
 	$("#editrole").val(data.details.role);
 	$("#editstatus").val(data.details.status);
 	},'json');

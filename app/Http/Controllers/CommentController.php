@@ -11,7 +11,10 @@ class CommentController extends Controller
 {
     public function store($id){
       
-      
+        $validator = request()->validateWithBag('add',[
+            'comment' => 'max:200',
+        ]);     
+
         $comment = new comments();
 
         $comment->PostID =  $id;

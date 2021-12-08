@@ -49,7 +49,7 @@ class UserController extends Controller
           ->with('comments',$comments)
           ->with('user',$user)
           ->with('guides', Guides::join('users','users.id','=','guides.UserID')
-          ->select('guides.id','guides.title','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
+          ->select('guides.id','guides.title','guides.category','guides.description','guides.likes','guides.content','guides.updated_at','users.fname','users.lname')
           ->where('slug',$slug)->first());
     }
 }
