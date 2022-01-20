@@ -1,6 +1,11 @@
 @extends('layouts.navbar')
 
 @section('content')
+<section class="section">
+<a class="button has-text-black modal-button edit"   id="edit" data-id="{{$guides->id}}" data-target = "#editGuideModal"><i class="fas fa-edit">&nbsp EDIT GUIDE</i></a>
+<a href="#deleteGuideModal" class="button  modal-button delete1" data-id="{{$guides->id}}"  data-target = "#deleteGuideModal"><i class="fas fa-trash-alt"></i>&nbsp DELETE GUIDE</a>
+				
+</section>
 
 <section class="section has-text-centered has-text-white">
              <h1 class="title  has-text-white">
@@ -150,7 +155,126 @@ $('#comment').keyup(function() {
     </div>
 </div>
 </section>
-                
+ 
+
+ <!-- Edit Modal HTML -->
+ <div id = "editGuideModal" class = "modal editguide">
+			<div class = "modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Edit Guide Form</p>	  
+					</header>
+						<section class="modal-card-body">
+							<form action="{{route('guides.update')}}" method="POST">
+								@csrf
+								<input type="text"  hidden name="id" id="eid" required>
+								<h5 class="title is-5">Title</h5>
+							
+								<input disabled class="input is-success" name="title" id="etitle" value="{{ old('title') }}" type="text" placeholder="Input Title" required>
+								
+									<br><br>
+								<h5 class="title is-5">Category</h5>
+									<input class="input is-success" name="category" id="ecategory" value="{{ old('category') }}" type="text" placeholder="Input Category" required>
+									@error('category')
+								
+									<em class="text-danger"> {{ $message }}</em>
+								
+									@enderror
+									<br><br>
+								<h5 class="title is-5">Description</h5>
+									<input class="input is-success" name="desc" id="edesc" value="{{ old('desc') }}" type="text" placeholder="Input Description" required>
+									@error('desc')
+								
+									<em class="text-danger"> {{ $message }}</em>
+									
+									@enderror
+									<br><br>
+								<h5 class="title is-5">Content</h5>
+									<textarea class="textarea is-success" name="content" id="econtent" value="{{ old('content') }}"  type="text" placeholder="Input Content" required></textarea>
+									@error('content')
+								
+										<em class="text-danger"> {{ $message }}</em>
+										
+									@enderror
+                                    <br>
+                                <h5 class="title is-5">Potential questions that this guide can answer:</h5>
+                                <h5 class="subtitle is-7">This will make us provide the right guide fors our users through our search results. 
+                                    <br>Please separate each questions with a comma <b>( , )</b> sign.  </h5>
+								<textarea class="textarea is-success" name="index" id="eindex" value= "{{ old('index') }}"  type="text" placeholder="Input here" required></textarea>
+									@error('content')
+							
+									<em class="text-danger"> {{ $message }}</em>
+										
+								@enderror
+						</section>
+					<footer class="modal-card-foot">
+						<input type="submit" class="button is-success" value="Save Changes">
+						<input type="button" class="button is-danger modalclose"  data-dismiss="modal" value="Cancel">
+					</footer>
+					</form>	
+				</div>
+					
+	</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteGuideModal" class="modal">
+		<div class="modal-background"></div>
+			<div class="modal-card">
+				<form action="{{route('guides.delete')}}" method="POST">
+				@csrf
+				@method('DELETE')
+				
+										
+						<header class="modal-card-head">
+							<p class="modal-card-title">Delete Guide</p>	  
+						</header>
+						<input type="text"  hidden name="id" id="deleteID" required></input>
+						<section class="modal-card-body">
+							<p>Are you sure you want to delete these Records?</p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</section>
+					<footer class="modal-card-foot">
+						<input input type="button" class="button is-light has-text-black modalclose" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="button is-danger" value ="Delete">
+					</footer>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+
+
+    <script>
+$(document).on('click','.edit',function(){
+	
+	var guide_id = $(this).data('id');
+
+	$.get("{{ route('guides.details')}}" ,{guide_id},function(data){
+	$("#eid").val(data.details.id);
+	
+	$("#etitle").val(data.details.title);
+	$("#ecategory").val(data.details.category);
+	$("#edesc").val(data.details.description);
+	$("#econtent").val(data.details.content);
+    $("#eindex").val(data.details.index);
+	},'json');
+
+
+ 
+})
+
+
+$(document).on('click','.delete1',function(){
+	var guide_id = $(this).data('id');
+	$.get("{{ route('guides.details')}}" ,{guide_id},function(data){
+	$("#deleteID").val(data.details.id);
+	
+	},'json');
+
+ 
+})
+
+</script>  
         
    
 @endsection

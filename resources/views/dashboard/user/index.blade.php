@@ -67,9 +67,39 @@
                 @endforeach		
             </div>
         </div>
+
+
 		<div class="section">
-		{{$guides->links('vendor.pagination.bulma-simple')}}	
+			<div class = "title">
+			<center>
+					<h1 class = "title is-size-1-desktop ">
+					 Most searched queries without results:
+					</h1>
+			</center>
+			</div>
+			<div class="card bm--card-equal-height">
+				<card class="card-content">
+					<div class="level is-mobile">
+						<div class="level-item has-text-centered">
+							<div>
+							<p class="title  is-size-6-mobile is-size-3-desktop">Is this helpful?</p>
+							</div>
+						</div>
+					<div class="level-item has-text-centered">
+					
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Total number of times searched</p>
+							<p class="title">92301823</p>
+						</div>
+					</div>
+				</card>
+			</div>
 		</div>
+
+		
+
 		
 <div> 
 

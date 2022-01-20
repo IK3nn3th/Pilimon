@@ -153,13 +153,13 @@ table {
 			</span>
 		</a>
 
-		<a class="navbar-item" href="{{route('manager.dashboard')}}">
+		<a class="navbar-item" href="{{route('user.guides')}}">
 			<span class="icon-text">
 					<span class="icon">
 					<i class="material-icons">library_add</i>
 					</span>
 					
-					<strong>Manage Guides</strong>
+					<strong>My Guides</strong>
 			</span> 
 		</a>
 

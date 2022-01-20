@@ -33,7 +33,7 @@ class LoginController extends Controller
                 return route('admin.dashboard');
             }
             elseif( Auth()->user()->role==2){
-                return route('manager.dashboard');
+                return route('user.dashboard');
             }
             elseif( Auth()->user()->role==3){
                 return route('user.dashboard');

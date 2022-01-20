@@ -45,8 +45,7 @@ Route::group(['prefix'=>'admin', 'middleware' =>['isAdmin','auth']], function(){
 
 Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
    
-    Route::get('settings', [UserController::class,'settings'])->name('user.settings');
-   
+  
     Route::get('/search',[SearchController::class,'search'])->name('web.search');
     Route::post('/changepass',[PasswordController::class,'changepassword'])->name('change.pass');
 
@@ -55,24 +54,20 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
 
     Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
     Route::get('user/dashboard', [UserController::class,'index'])->name('user.dashboard');   
+    Route::get('user/guides', [UserController::class,'myGuides'])->name('user.guides');   
      
     Route::get('/guide/{slug}', [UserController::class,'show'])->name('manager.show');
-   
+    Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
 
-});
-
-Route::group(['prefix'=>'manager', 'middleware' =>['isManager','auth']], function(){
 
     Route::get('guide', [UserController::class,'index'])->name('manager.guides');
+    
     Route::get('settings', [ManagerController::class,'settings'])->name('manager.settings');
-  
- 
     Route::post('/manager/addGuide', [ManagerController::class,'SaveGuide'])->name('guides.add');
     Route::get('/manager/Guidelist', [ManagerController::class, 'getGuides'])->name('guides.list');
     Route::post('/manager/updateGuide',[ManagerController::class, 'GuideUpdate'])->name('guides.update');
     Route::delete('/manager/DeleteGuide',[ManagerController::class, 'deleteGuide'])->name('guides.delete');
     Route::get('/manager/dashboard', [ManagerController::class,'index'])->name('manager.dashboard');
     Route::get('/manager/historylogs', [ManagerController::class, 'getLogs'])->name('logs.list');
-    Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
 });
 

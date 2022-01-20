@@ -16,9 +16,22 @@ class UserController extends Controller
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-        ->orderby('guides.updated_at', 'DESC')->paginate(6));
+        ->orderby('guides.updated_at', 'DESC')->paginate(4));
     }
   
+    function myGuides(){
+        $user = Auth::user();
+            
+    return view('dashboard.user.guide')
+        ->with('user',$user)
+        ->with('guides',Guides::join('users','users.id','=','guides.UserID')
+        ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
+        ->where('users.fname','=',$user->fname)
+        ->orderby('guides.updated_at', 'DESC')->paginate(4));
+    }
+  
+
+
     public function deletecomment($id){
         $user = Auth::user();
         $comment= comments::findorfail($id);

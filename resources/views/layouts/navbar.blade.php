@@ -160,16 +160,14 @@ td {
         </span>
       </a>
     @endif
-    @if(Auth::user()->role==1)
-    <a class="navbar-item" href="{{route('manager.dashboard')}}">
-			<span class="icon-text">
-					<span class="icon">
-					<i class="material-icons">library_add</i>
-					</span>
-					<strong>Manage Guides</strong>
-			</span> 
-		</a>
-    @endif
+    <a class="navbar-item" href="{{route('user.guides')}}">
+        <span class="icon-text">
+            <span class="icon">
+            <i class="material-icons">library_add</i>
+            </span>
+            <strong>My Guides</strong>
+        </span> 
+      </a>
       @if(Auth::user()->role<=2)
       <a class="navbar-item" href="{{route('user.dashboard')}}">
         <span class="icon-text">
@@ -180,6 +178,7 @@ td {
         </span> 
       </a>
       @endif
+     
       <a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
         <span class="icon-text">
             <span class="icon">
@@ -188,6 +187,7 @@ td {
             <strong>Change Password</strong>
         </span> 
       </a>
+      
     </div>
 
     <div class="navbar-end">
@@ -301,5 +301,7 @@ $(document).ready(function() {
 	
 });
 </script>
+
+
 </body>
 </html>

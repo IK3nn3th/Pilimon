@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->foreign('UserID')
                 ->references('id')
                 ->on('users');
+           
             $table->timestamps();
         });
 
