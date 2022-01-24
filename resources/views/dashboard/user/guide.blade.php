@@ -58,11 +58,13 @@
 							</br></br></br>
 					</h1>
 
-					<a class=" mt-4 button modal-button  is-large is-info is-rounded is-fullwidth buttons is-centered" href="#addGuideModal" data-target = "#addGuideModal" >
-						Create a new guide
-						</a>
+					
               </div>
                 @endforelse
+
+				<a class=" mt-4 button modal-button  is-large is-info is-rounded is-fullwidth buttons is-centered" href="#addGuideModal" data-target = "#addGuideModal" >
+						Create a new guide
+						</a>
             </div>
         </div>
 
