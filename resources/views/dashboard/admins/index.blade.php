@@ -118,6 +118,7 @@ table {
 <title>Pilimon</title>
 
 </head>
+
 <body  class=" has-navbar-fixed-top">
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">

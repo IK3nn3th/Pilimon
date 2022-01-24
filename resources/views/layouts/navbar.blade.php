@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 
 <!-- Modal HTML -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -109,85 +109,85 @@ td {
 <body  class=" has-navbar-fixed-top">
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-  @if(Auth::user()->role==2)
-    <a class="navbar-item" href="{{route('manager.dashboard')}}">
-      <img src="/images/P.png">
-    </a>
-  @elseif(Auth::user()->role==3)
-  <a class="navbar-item" href="{{route('user.dashboard')}}">
-      <img src="/images/P.png">
-    </a>
-    @elseif(Auth::user()->role==1)
-  <a class="navbar-item" href="{{route('admin.dashboard')}}">
-      <img src="/images/P.png">
-    </a>
-  @endif
-    <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+      @if(Auth::user()->role==2)
+        <a class="navbar-item" href="{{route('manager.dashboard')}}">
+          <img src="/images/P.png">
+        </a>
+      @elseif(Auth::user()->role==3)
+      <a class="navbar-item" href="{{route('user.dashboard')}}">
+          <img src="/images/P.png">
+        </a>
+        @elseif(Auth::user()->role==1)
+      <a class="navbar-item" href="{{route('admin.dashboard')}}">
+          <img src="/images/P.png">
+        </a>
+      @endif
+        <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu  ">
     <div class="navbar-start">
-    <h2 class ="navbar-item"><strong> Hello,  {{ $user['fname'] }}!</strong> </h2>
-    @if(Auth::user()->role==2)
-      <a class="navbar-item" href="{{route('manager.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-                <i class="fas fa-home"></i>
+        <h2 class ="navbar-item"><strong> Hello,  {{ $user['fname'] }}!</strong> </h2>
+        @if(Auth::user()->role==2)
+          <a class="navbar-item" href="{{route('manager.dashboard')}}">
+            <span class="icon-text">
+                <span class="icon">
+                    <i class="fas fa-home"></i>
+                </span>
+                <strong>Home</strong>
             </span>
-            <strong>Home</strong>
-        </span>
-      </a>
-    @elseif(Auth::user()->role==3)
-    <a class="navbar-item" href="{{route('user.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-                <i class="fas fa-home"></i>
+          </a>
+        @elseif(Auth::user()->role==3)
+        <a class="navbar-item" href="{{route('user.dashboard')}}">
+            <span class="icon-text">
+                <span class="icon">
+                    <i class="fas fa-home"></i>
+                </span>
+                <strong>Home</strong>
             </span>
-            <strong>Home</strong>
-        </span>
-      </a>
-    @elseif(Auth::user()->role==1)
-    <a class="navbar-item" href="{{route('admin.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-                <i class="fas fa-home"></i>
+          </a>
+        @elseif(Auth::user()->role==1)
+        <a class="navbar-item" href="{{route('admin.dashboard')}}">
+            <span class="icon-text">
+                <span class="icon">
+                    <i class="fas fa-home"></i>
+                </span>
+                <strong>Home</strong>
             </span>
-            <strong>Home</strong>
-        </span>
-      </a>
-    @endif
-    <a class="navbar-item" href="{{route('user.guides')}}">
-        <span class="icon-text">
-            <span class="icon">
-            <i class="material-icons">library_add</i>
-            </span>
-            <strong>My Guides</strong>
-        </span> 
-      </a>
-      @if(Auth::user()->role<=2)
-      <a class="navbar-item" href="{{route('user.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-            <i class="fas fa-book"></i>
-            </span>
-            <strong>View Guides</strong>
-        </span> 
-      </a>
-      @endif
-     
-      <a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
-        <span class="icon-text">
-            <span class="icon">
-            <i class="fas fa-key"></i>
-            </span>
-            <strong>Change Password</strong>
-        </span> 
-      </a>
-      
+          </a>
+        @endif
+        <a class="navbar-item" href="{{route('user.guides')}}">
+            <span class="icon-text">
+                <span class="icon">
+                <i class="material-icons">library_add</i>
+                </span>
+                <strong>My Guides</strong>
+            </span> 
+          </a> 
+          @if(Auth::user()->role<=2)
+          <a class="navbar-item" href="{{route('user.dashboard')}}">
+            <span class="icon-text">
+                <span class="icon">
+                <i class="fas fa-book"></i>
+                </span>
+                <strong>View Guides</strong>
+            </span> 
+          </a>
+          @endif
+        
+          <a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
+            <span class="icon-text">
+                <span class="icon">
+                <i class="fas fa-key"></i>
+                </span>
+                <strong>Change Password</strong>
+            </span> 
+          </a>
+          
     </div>
 
     <div class="navbar-end">
@@ -213,6 +213,7 @@ td {
 </nav>
 
 @yield('content')
+
 <br><br><br><br><br><br>
 <footer class="footer footer-size">
  
@@ -221,7 +222,7 @@ td {
 Bachelor of Science in Information Technology
  
     </p>
-  </div>
+ 
 </footer>
 
 
@@ -251,7 +252,8 @@ Bachelor of Science in Information Technology
 					</form>	
 				</div>
 					
-	</div>
+	  </div>
+   
 
 @if(!empty(session('error'))){
 <script>

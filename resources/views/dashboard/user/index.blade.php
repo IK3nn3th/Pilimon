@@ -85,6 +85,7 @@
 							<p class="title  is-size-6-mobile is-size-3-desktop">Is this helpful?</p>
 							</div>
 						</div>
+					</div>
 					<div class="level-item has-text-centered">
 					
 					</div>

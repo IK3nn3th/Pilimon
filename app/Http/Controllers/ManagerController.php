@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Auth;
 class ManagerController extends Controller
 {
     
+
+    
     function index(){
         $user = Auth::user();
         $data = Guides::join('users','users.id','=','guides.UserID')
-        ->select('guides.id','guides.title','guides.category','guides.description','guides.content','users.fname' ,'users.lname','guides.created_at','guides.updated_at','guides.views','guides.likes')
+        ->select('guides.id','guides.UserID','guides.title','guides.category','guides.description','guides.content','users.fname' ,'users.lname','guides.created_at','guides.updated_at','guides.views','guides.likes')
         ->get();
         
         return view('dashboard.manager.index')
@@ -151,4 +153,7 @@ class ManagerController extends Controller
         return redirect()->route('user.dashboard');
     
     }
+
+
+    
 }

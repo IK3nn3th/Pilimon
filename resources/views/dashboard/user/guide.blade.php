@@ -53,14 +53,14 @@
 				</div>
                 @empty
               <div class="container has-text-centered">
-              <h1 class = "subtitle is-size-3-desktop  has-text-white ">
-                    No guides created yet. Let's create one and share your knowledge! 
-                    </br></br></br>
-              </h1>
+					<h1 class = "subtitle is-size-3-desktop  has-text-white ">
+							No guides created yet. Let's create one and share your knowledge! 
+							</br></br></br>
+					</h1>
 
-              <a class=" mt-4 button modal-button  is-large is-info is-rounded is-fullwidth buttons is-centered" href="#addGuideModal" data-target = "#addGuideModal" >
-				  Create a new guide
-                </a>
+					<a class=" mt-4 button modal-button  is-large is-info is-rounded is-fullwidth buttons is-centered" href="#addGuideModal" data-target = "#addGuideModal" >
+						Create a new guide
+						</a>
               </div>
                 @endforelse
             </div>
@@ -85,6 +85,7 @@
 							<p class="title  is-size-6-mobile is-size-3-desktop">Is this helpful?</p>
 							</div>
 						</div>
+					</div>	
 					<div class="level-item has-text-centered">
 					
 					</div>
@@ -101,9 +102,7 @@
 		
 
 		
-<div> 
-
-</div>
+ 
 
 
 <!--Add  Modal HTML -->
@@ -157,7 +156,7 @@
                                     <br>
                                 <h5 class="title is-5">Potential questions that this guide can answer:</h5>
                                 <h5 class="subtitle is-7">This will make us provide the right guide fors our users through our search results. 
-                                    <br>Please separate each questions with a comma <b>( , )</b> sign.  </h5>
+                                    <br>Please separate each questions with a comma <b>( , ) sign.  </h5>
 								<textarea class="textarea is-success" name="index" id="index" value= "{{ old('index') }}"  type="text" placeholder="Input here" required></textarea>
 									@error('content')
 							
@@ -170,8 +169,8 @@
 						<input type="button" class="button is-danger modalclose" data-target = "#addGuideModal"  data-dismiss="modal" value="Cancel">
 					</form>	
 				</div>
-					
-	</div>
+	</div>		
+			
 
 
 <script type="text/javascript">

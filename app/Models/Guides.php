@@ -9,9 +9,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
-class Guides extends Model
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+
+class Guides extends Model implements ReactableInterface    
 {
-    use HasFactory, Sluggable, Searchable,Notifiable;
+    use HasFactory, Sluggable, Searchable,Notifiable, Reactable;
     public $timestamps = false;
     protected $fillable = [
         'title',

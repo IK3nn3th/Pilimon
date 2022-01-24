@@ -2,9 +2,10 @@
 
 @section('content')
 <section class="section">
+    @if(Auth::user()->id == $guides->UserID)
 <a class="button has-text-black modal-button edit"   id="edit" data-id="{{$guides->id}}" data-target = "#editGuideModal"><i class="fas fa-edit">&nbsp EDIT GUIDE</i></a>
 <a href="#deleteGuideModal" class="button  modal-button delete1" data-id="{{$guides->id}}"  data-target = "#deleteGuideModal"><i class="fas fa-trash-alt"></i>&nbsp DELETE GUIDE</a>
-				
+	@endif		
 </section>
 
 <section class="section has-text-centered has-text-white">
@@ -51,18 +52,25 @@
                     <div>
                         <form action="/user/guide/{{$guides->id}}/like" method = "POST">
                             @csrf 
-                            <button name= "submit" class="button is-size-3-desktop is-size-6-mobile buttons is-centered">
-                                Very helpful
+                            @if ($likeCheck == 1)
+                            <button name= "submit" class="button is-ghost is-size-3-desktop is-size-5-mobile">
+                            <i class="fa fa-thumbs-up"></i> Liked
                             </button>
+                            @else
+                            <button name= "submit" class="button is-ghost is-size-3-desktop is-size-5-mobile">
+                            <i class="fa fa-thumbs-o-up"></i> Like
+                            </button>
+                            @endif
                         </form>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
                         <p class="heading">Total Likes</p>
-                        <p class="title">{{$guides->likes}}</p>
+                
+                        <p class="title">{{$likes}}</p>
                     </div>
-                </div>
+                </div>  
             </card>
         </div>
   

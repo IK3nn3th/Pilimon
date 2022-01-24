@@ -15,7 +15,7 @@ class UserController extends Controller
     return view('dashboard.user.index')
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
-        ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
+        ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
         ->orderby('guides.updated_at', 'DESC')->paginate(4));
     }
   
@@ -25,8 +25,8 @@ class UserController extends Controller
     return view('dashboard.user.guide')
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
-        ->select('guides.views','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
-        ->where('users.fname','=',$user->fname)
+        ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
+        ->where('guides.UserID','=',$user->id)
         ->orderby('guides.updated_at', 'DESC')->paginate(4));
     }
   
@@ -49,9 +49,25 @@ class UserController extends Controller
       
         Guides::where('slug',$slug)
         ->increment('views',1);
-      
+
         $user = Auth::user();
-     
+        //Get total likes
+        $guides =  Guides::where('slug',$slug)->first();
+        $reactantFacade = $guides->viaLoveReactant();
+        $reactionCounters = $reactantFacade->getReactionCounterOfType('Like')->getCount();
+      
+        //check if the user liked
+        $reacterFacade = $user->viaLoveReacter();
+        if ( $reacterFacade->hasNotReactedTo($guides)){
+            $likeCheck = 0;     
+        }
+        else{
+            $likeCheck = 1;  
+        }
+        
+        
+        
+
         $comments = comments::join('users','users.id','=','comments.UserID')
          ->join('guides','guides.id','=','comments.PostID')
           ->select('comments.UserID','comments.id','comments.comment','comments.created_at','users.fname','users.lname')
@@ -61,8 +77,12 @@ class UserController extends Controller
           return view('dashboard.user.show')
           ->with('comments',$comments)
           ->with('user',$user)
+          ->with('likes',$reactionCounters)
+          ->with('likeCheck',$likeCheck)
           ->with('guides', Guides::join('users','users.id','=','guides.UserID')
-          ->select('guides.id','guides.title','guides.category','guides.description','guides.likes','guides.content','guides.updated_at','users.fname','users.lname')
+          ->select('guides.id','guides.title','guides.UserID','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
           ->where('slug',$slug)->first());
+
+       
     }
 }

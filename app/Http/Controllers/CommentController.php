@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Guides;
 use App\Models\comments;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\User;
 class CommentController extends Controller
 {
     public function store($id){
@@ -25,8 +25,21 @@ class CommentController extends Controller
     }
 
     public function savelike($id){
-    Guides::find($id)
-    ->increment('likes',1);
-    return back();
+        $Guides=  Guides::find($id);
+  
+    $user = Auth::User();
+
+    $reacterFacade = $user->viaLoveReacter();
+
+
+    if ( $reacterFacade->hasNotReactedTo($Guides)){
+        $reacterFacade->reactTo($Guides, 'Like');        
+    }
+
+    else{
+        $reacterFacade->unreactTo($Guides, 'Like');
+    }
+   
+    return redirect()->back();
     }
 }
