@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
        // Paginator::defaultView('pagination-bulma::bulma');
         Paginator::defaultSimpleView('pagination-bulma::bulma-simple');
+        Schema::defaultStringLength(191);
     }
 }
