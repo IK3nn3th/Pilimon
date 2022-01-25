@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Guides;
 use App\Models\User;
 use App\Models\logs;
-
+use App\Models\Search;
 use DataTables;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class ManagerController extends Controller
@@ -60,6 +62,24 @@ class ManagerController extends Controller
         $logs->Role = "Manager";
         $logs->Content = "Created ". request('title') . " guide";
         $logs->save();
+
+        //removes index from most search query if exist. 
+    
+        //creates a collection of all indexes. 
+        $indexes = Str::of($req->index)->explode(',');
+       
+        // checks each index collection if one of  Search term matches and deletes it. 
+        foreach($indexes as $term){
+           $results = Search::search($term)->get();
+            foreach($results as $result){
+                $searchTerm = Search::findorFail($result->id);
+                $searchTerm->delete();
+            }
+           
+        }
+
+
+
         return redirect()->route('user.dashboard')->withErrors($validator, 'add');; 
         
         
@@ -109,32 +129,50 @@ class ManagerController extends Controller
     }
     
     public function GuideUpdate(Request $request){
+        $guide_id = $request->id;
+      
        $validator =  $request->validateWithBag('update',[
-            'title'=>'required|max:255',
+           
             'category'=>'required',
             'desc'=>'required',
             'content'=>'required'
         ]);
-        $test  = $request->title;
-     
-        $guide_id = $request->id;
+        //update guide
         $guideDetails = Guides::find($guide_id);
+        
         $guideDetails->updated_at= Carbon::now();
-        $guideDetails->title= $request->title;
         $guideDetails->category= $request->category;
         $guideDetails->description= $request->desc;
         $guideDetails->content= $request->content;
+        $guideDetails->index= $request->index;
         $guideDetails->UserID  = Auth::id();
         $guideDetails->save();
-        
+        // create logs for update
         $logs = new logs(); 
         $logs->user= Auth::id();
         $logs->Action = "Update";
         $logs->Role = "Manager";
         $logs->Content = "Updated guide ID: ".  $request->id . " with title: " . $request->title;
         $logs->save();
+       
+        //removes index from most search query if exist. 
+    
+        //creates a collection of all indexes. 
+        $indexes = Str::of($request->index)->explode(',');
+       
+        // checks each index collection if one of  Search term matches and deletes it. 
+        foreach($indexes as $term){
+           $results = Search::search($term)->get();
+            foreach($results as $result){
+                $searchTerm = Search::findorFail($result->id);
+                $searchTerm->delete();
+            }
+           
+        }
+
+        return back()->withErrors($validator, 'update');    
+     
         
-        return back()->withErrors($validator, 'update');   
     }
     public function deleteGuide(Request $request){
         

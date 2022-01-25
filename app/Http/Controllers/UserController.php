@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Guides;
 use App\Models\comments;
 use App\Models\logs;
+use App\Models\Search;
 
 class UserController extends Controller
 {
     function index(){
         $user = Auth::user();
+
+        //get most searched queries
+        $searches = Search::all();
             
     return view('dashboard.user.index')
+        ->with('searches',$searches)
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
@@ -21,8 +26,10 @@ class UserController extends Controller
   
     function myGuides(){
         $user = Auth::user();
-            
+        $searches = Search::all();
+
     return view('dashboard.user.guide')
+        ->with('searches',$searches)
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')

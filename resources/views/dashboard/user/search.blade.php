@@ -21,6 +21,7 @@
 		<center>
 				<h1 class = "title is-size-1-desktop ">
 				Search results for "{{ request()->input('search')}}"
+        
 				</h1>
 		</center>
 	    </div>
