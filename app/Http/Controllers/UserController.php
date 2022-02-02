@@ -34,7 +34,7 @@ class UserController extends Controller
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')
         ->where('guides.UserID','=',$user->id)
-        ->orderby('guides.updated_at', 'DESC')->paginate(4));
+        ->orderby('guides.updated_at', 'DESC')->paginate(6));
     }
   
 
