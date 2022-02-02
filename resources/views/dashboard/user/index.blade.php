@@ -27,7 +27,7 @@
 	    </div>
 		<div class = "section ">
 			<div class="columns is-multiline">
-            @foreach($guides as $guide)
+            @foreach($Latestguides as $Latestguide)
 				<div class= "column is-6-desktop is-12-mobile">
 					<div class="card bm--card-equal-height">
 						<div class="card-content" style="height: 100%">
@@ -38,37 +38,92 @@
 							  </figure>
 							</div>
 							<div class="media-content">
-							  <p class="title is-size-4-desktop is-size-6-mobile"> {{$guide->title}}</p>
+							  <p class="title is-size-4-desktop is-size-6-mobile"> {{$Latestguide->title}}</p>
 							  
 							</div>
 						  </div>          
 						</div>
                         <div class="card-content">
                                 <p  class= "pt-8 text-white italic text-lg ">
-                                    Category: {{$guide->category}}
+                                    Category: {{$Latestguide->category}}
                                     </p>
                                     <p  class= "pt-8 text-gray-700 text-lg   pb-10 leading-8 font-light">
-                                    <span class = "font-bold">Description:  </span>{{$guide->description}}
+                                    <span class = "font-bold">Description:  </span>{{$Latestguide->description}}
                                     </p>    
                         </div>  
                         
                             <div class="card-content">
-                                <a href="/user/guide/{{$guide->slug}}" class="button is-rounded buttons is-centered ">Keep Reading</a>
+                                <a href="/user/guide/{{$Latestguide->slug}}" class="button is-rounded buttons is-centered ">Keep Reading</a>
                             </div>
                
                         
                   
                         <footer class="card-footer">
-                                <time class="card-footer-item" datetime="2016-1-1"><p class = "subtitle  is-size-6-mobile">Last updated: <br> {{ date ('jS M Y', strtotime($guide->updated_at)) }}</p></time>
-                                <h6 class="card-footer-item "><p class = "subtitle  is-size-6-mobile"> Views: {{$guide->views}}</p> </h6>
+                                <time class="card-footer-item" datetime="2016-1-1"><p class = "subtitle  is-size-6-mobile">Last updated: <br> {{ date ('jS M Y', strtotime($Latestguide->updated_at)) }}</p></time>
+                                <h6 class="card-footer-item "><p class = "subtitle  is-size-6-mobile"> Views: {{$Latestguide->views}}</p> </h6>
                         </footer>
 					</div>
 				</div>
                 @endforeach		
             </div>
         </div>
+		<br><br><br>
 
+		<div class = "title">
+		<center>
+				<h1 class = "title is-size-1-desktop ">
+				RECENTLY UPDATED GUIDES
+				</h1>
+		</center>
+	    </div>
+		<div class = "section ">
+			<div class="columns is-multiline">
+            @foreach($Updatedguides as $Updatedguide)
+				<div class= "column is-6-desktop is-12-mobile">
+					<div class="card bm--card-equal-height">
+						<div class="card-content" style="height: 100%">
+						  <div class="media">
+							<div class="media-left">
+							  <figure class="image is-48x48">
+								<img src="/images/logo_plmun.png" alt="Placeholder image">
+							  </figure>
+							</div>
+							<div class="media-content">
+							  <p class="title is-size-4-desktop is-size-6-mobile"> {{$Updatedguide->title}}</p>
+							  
+							</div>
+						  </div>          
+						</div>
+                        <div class="card-content">
+                                <p  class= "pt-8 text-white italic text-lg ">
+                                    Category: {{$Updatedguide->category}}
+                                    </p>
+                                    <p  class= "pt-8 text-gray-700 text-lg   pb-10 leading-8 font-light">
+                                    <span class = "font-bold">Description:  </span>{{$Updatedguide->description}}
+                                    </p>    
+                        </div>  
+                        
+                            <div class="card-content">
+                                <a href="/user/guide/{{$Updatedguide->slug}}" class="button is-rounded buttons is-centered ">Keep Reading</a>
+                            </div>
+               
+                        
+                  
+                        <footer class="card-footer">
+                                <time class="card-footer-item" datetime="2016-1-1"><p class = "subtitle  is-size-6-mobile">Last updated: <br> {{ date ('jS M Y', strtotime($Updatedguide->updated_at)) }}</p></time>
+                                <h6 class="card-footer-item "><p class = "subtitle  is-size-6-mobile"> Views: {{$Updatedguide->views}}</p> </h6>
+                        </footer>
+					</div>
+				</div>
+                @endforeach		
+            </div>
+        </div>
+		<div class="section">
 
+		<a class=" mt-4 button  is-large is-info is-rounded is-fullwidth buttons is-centered" href="/user/allguides"  >
+						View All Guides
+		</a>
+		</div>
 		<div class="section">
 			<div class = "title">
 			<center>

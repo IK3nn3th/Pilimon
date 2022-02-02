@@ -58,7 +58,9 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
      
     Route::get('/guide/{slug}', [UserController::class,'show'])->name('manager.show');
     Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
-
+    
+    Route::get('/allguides', [UserController::class,'AllGuides'])->name('all.guides');
+    
 
     Route::get('guide', [UserController::class,'index'])->name('manager.guides');
     
