@@ -2,12 +2,14 @@
 
 @section('content')
 
+
+
     <div class = "section">
         <div class="columns is-mobile is-multiline ">
             <div class= "column is-12-desktop">
                 <form action="{{ route('web.search') }}" method="GET">
 			 	@csrf
-				<input class="input" type="text" name="search"  value="{{ request()->input('query') }}" placeholder="Search here...">
+				<input class="input" type="text" name="search"  value="{{ request()->input('query') }}" placeholder="Search here..." required>
 			 
 				<button type ="submit" class=" mt-4 button is-success is-rounded is-fullwidth buttons is-centered" >
 				  Search
@@ -132,33 +134,42 @@
 					</h1>
 			</center>
 			</div>
+				 
+
+			<table class="table is-striped is-narrow is-hoverable is-fullwidth">
+			<thead>
+				<tr>
+				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Queries:</th>				
+				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Total number of times searched:</th>
+				</tr>
+			</thead>
+			
+
+			<tbody>
 			@forelse ($searches as $search)
-			<div class="card bm--card-equal-height">
-				<card class="card-content">
-					<div class="level is-mobile">
-						<div class="level-item has-text-centered">
-							<div>
-							<p class="title  is-size-6-mobile is-size-4-desktop">{{$search->search_term}}</p>
-							</div>
-						</div>
-					
-					
-						<div class="level-item has-text-centered">
-							<div>
-								<p class="heading">Total number of times searched</p>
-								<p class="title">{{$search->Search_count}}</p>
-							</div>
-						</div>
-					</div>
-				</card>
-			</div>
+			<tr>
+				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$search->search_term}}</p></td>				
+				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$search->Search_count}}</p></td>
+			</tr>
+
 			@empty
               <div class="container has-text-centered">
-              <h1 class = "subtitle is-size-3-desktop  has-text-white ">
+              <h1 class = "subtitle is-size-3-desktop has-text-white ">
                    All questions searched has results found!
               </h1>
               </div>
+			
 			@endforelse
+			</tbody>
+			</table>
+			
+							
+			
+			 			
+			
+						
+			 
+			
 
 		</div>
 

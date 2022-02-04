@@ -156,16 +156,7 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
   <div id="navbarBasicExample" class="navbar-menu  ">
     <div class="navbar-start">
     <h2 class ="navbar-item"><strong> Hello,  {{ $user['fname'] }}! </strong> </h2>
-    @if(Auth::user()->role==2)
-      <a class="navbar-item" href="{{route('manager.dashboard')}}">
-        <span class="icon-text">
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <strong>Home</strong>
-        </span>
-      </a>
-    @elseif(Auth::user()->role==1)
+   
     <a class="navbar-item" href="{{route('admin.dashboard')}}">
           <span class="icon-text">
               <span class="icon">
@@ -174,17 +165,16 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
               <strong>Home</strong>
           </span>
         </a>
-    @endif
-    @if(Auth::user()->role==1)
-	<a class="navbar-item" href="{{route('manager.dashboard')}}">
-		<span class="icon-text">
-				<span class="icon">
-				<i class="material-icons">library_add</i>
-				</span>
-				<strong>Manage Guides</strong>
-		</span> 
-    </a>
-	@else
+ 
+    <a class="navbar-item" href="{{route('user.guides')}}">
+			<span class="icon-text">
+					<span class="icon">
+					<i class="material-icons">library_add</i>
+					</span>
+					
+					<strong>My Guides</strong>
+			</span> 
+		</a>
       <a class="navbar-item" href="{{route('user.dashboard')}}">
 		<span class="icon-text">
 				<span class="icon">
@@ -193,17 +183,7 @@ table.dataTable>tbody>tr.child ul.dtr-details>li{
 				<strong>View Guides</strong>
 		</span> 
       </a>
-	@endif
-	@if(Auth::user()->role==1)
-    <a class="navbar-item" href="{{route('user.dashboard')}}">
-			<span class="icon-text">
-					<span class="icon">
-          <i class="fas fa-book"></i>
-					</span>
-					<strong>View Guides</strong>
-			</span> 
-		</a>
-    @endif
+ 
     <a class="navbar-item modal-button" href="#Changepassword" data-target="#Changepassword">
         <span class="icon-text">
             <span class="icon">

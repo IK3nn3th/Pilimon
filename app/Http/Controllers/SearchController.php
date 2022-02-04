@@ -13,7 +13,7 @@ class SearchController extends Controller
         if ($req->has('search')){
             $check = Guides::search($req->search)->get();
             $searchResult = (count($check));
-
+            
             if( $searchResult <1) {
                //returns empty set;
                 $guides = Guides::search($req->search)->paginate(6);
@@ -45,6 +45,7 @@ class SearchController extends Controller
         }
         else{
             $guides = Guides:: paginate(6);
+            error_log("empty set");
         }
    
        return view('dashboard.user.search')

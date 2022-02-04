@@ -10,12 +10,15 @@
 
 
 
+
 <!-- Bulma CSS -->	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <!-- Fontawesome-->
 <script src="https://kit.fontawesome.com/3b6fb5d974.js" crossorigin="anonymous"></script>
 <!-- Material Icons-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 
 <!-- Javascript-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -109,11 +112,8 @@ td {
 <body  class=" has-navbar-fixed-top">
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-      @if(Auth::user()->role==2)
-        <a class="navbar-item" href="{{route('manager.dashboard')}}">
-          <img src="/images/P.png">
-        </a>
-      @elseif(Auth::user()->role==3)
+     
+      @if(Auth::user()->role==3)
       <a class="navbar-item" href="{{route('user.dashboard')}}">
           <img src="/images/P.png">
         </a>
@@ -303,6 +303,7 @@ $(document).ready(function() {
 	
 });
 </script>
+
 
 
 </body>
