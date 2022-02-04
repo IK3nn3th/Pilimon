@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function search(Request $req){
         $user = Auth::user();
-        
+       
         if ($req->has('search')){
             $check = Guides::search($req->search)->get();
             $searchResult = (count($check));
@@ -17,7 +17,7 @@ class SearchController extends Controller
             if( $searchResult <1) {
                //returns empty set;
                 $guides = Guides::search($req->search)->paginate(6);
-
+                
                //calls Search model
                 $search = new Search();
                 
@@ -39,8 +39,8 @@ class SearchController extends Controller
              }
              else{
 
-                $guides = Guides::search($req->search)->paginate(6);
-               
+                $guides = Guides::search($req->search)->paginate(6) ->withQueryString();
+          
              }
         }
         else{
@@ -50,7 +50,6 @@ class SearchController extends Controller
    
        return view('dashboard.user.search')
        ->with('guides', $guides)
-     
        ->with('user', $user);
     }
 }
