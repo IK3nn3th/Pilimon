@@ -69,16 +69,15 @@
             {{$guides->links('vendor.pagination.bulma-simple')}}	
 
         </div>
-
-        <div class="section">
+		<div class="section">
 			<div class = "title">
 			<center>
 					<h1 class = "title is-size-1-desktop ">
-					 Most searched questions without results:
+					 Most searched queries without results:
 					</h1>
 			</center>
 			</div>
-			
+			@if (count($searches) > 0)
 			<table class="table is-striped is-narrow is-hoverable is-fullwidth">
 		
 			<thead>
@@ -90,26 +89,26 @@
 			
 
 			<tbody>
-			@forelse ($searches as $search)
+			@foreach ($searches as $search)
 			<tr>
 				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$search->search_term}}</p></td>				
 				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$search->Search_count}}</p></td>
 			</tr>
 
-			@empty
-              <div class="container has-text-centered">
+			 
+              
+			
+			@endforeach
+			</tbody>
+			</table>
+			@else
+			<div class="container has-text-centered">
               <h1 class = "subtitle is-size-3-desktop has-text-white ">
                    All questions searched has results found!
               </h1>
-              </div>
-			
-			@endforelse
-			</tbody>
-			</table>
-	
+              </div>	
+			@endif
 		</div>
-
-		
 		 
 		<div class="section">
 			<div class = "title">
@@ -120,35 +119,42 @@
 			</center>
 			</div>
 			
+			@if (count($searchterms) > 0)
 			<table class="table is-striped is-narrow is-hoverable is-fullwidth">
-		 
+			 
 			<thead>
 				<tr>
 				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Queries:</th>				
 				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Total number of times searched:</th>
 				</tr>
 			</thead>
-			
+
 
 			<tbody>
-			@forelse ($searchterms as $searchterm)
+			@foreach ($searchterms as $searchterm)
 			<tr>
 				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$searchterm->searchterm}}</p></td>				
 				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$searchterm->Searchcount}}</p></td>
 			</tr>
 
-			@empty
+		
+			
+			@endforeach
+
+			</tbody>
+			</table>
+			@else
+		 
               <div class="container has-text-centered">
               <h1 class = "subtitle is-size-3-desktop has-text-white ">
                    No questions searched so far!
               </h1>
               </div>
-			
-			@endforelse
-			</tbody>
-			</table>
+
+			@endif
 						
 		</div>
+
 
 		
 
