@@ -143,17 +143,18 @@ td {
 		url:"/user/autocomplete",
 	 
 		success: function(response){
-		console.log(response);
+		//console.log(response);
 		//	Autocompleteterms(response);
 		}
 
 
 	});
 
-	function Autocompleteterms(availableTags){
-		$( "#search" ).autocomplete({
+	$( "#search" ).autocomplete({
 		source: availableTags
 		});
+	function Autocompleteterms(availableTags){
+	
 	}
    
 
