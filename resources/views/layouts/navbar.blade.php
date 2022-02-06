@@ -124,17 +124,15 @@ td {
 		success: function(response){
 		console.log(response);
 		//	Autocompleteterms(response);
+    $( "#search" ).autocomplete({
+		source: response
+		});
+
 		}
 
 
 	});
-
-	function Autocompleteterms(availableTags){
-		$( "#search" ).autocomplete({
-		source: availableTags
-		});
-	}
-   
+ 
 
   });
   </script>
