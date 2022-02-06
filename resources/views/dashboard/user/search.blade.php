@@ -8,7 +8,7 @@
             <div class= "column is-12-desktop">
                 <form action="{{ route('web.search') }}" method="GET">
                     @csrf
-                    <input class="input" type="text" name="search"  value="{{ request()->input('search') }}" placeholder="Search here..." required>
+                    <input class="input" type="text" name="search" id="search" value="{{ request()->input('search') }}" placeholder="Search here..." required>
                   
                     <button type ="submit" class=" mt-4 button is-success is-rounded is-fullwidth buttons is-centered" >
                       Search

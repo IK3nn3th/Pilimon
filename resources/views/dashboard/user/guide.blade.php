@@ -82,6 +82,7 @@
 			</div>
 			
 			<table class="table is-striped is-narrow is-hoverable is-fullwidth">
+		
 			<thead>
 				<tr>
 				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Queries:</th>				
@@ -107,14 +108,46 @@
 			@endforelse
 			</tbody>
 			</table>
-			
-							
-			
-			 			
-			
 						
-			 
+		</div>
+		 
+		<div class="section">
+			<div class = "title">
+			<center>
+					<h1 class = "title is-size-1-desktop ">
+					 Trending Searches:
+					</h1>
+			</center>
+			</div>
 			
+			<table class="table is-striped is-narrow is-hoverable is-fullwidth">
+			 
+			<thead>
+				<tr>
+				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Queries:</th>				
+				<th  class="title is-size-6-mobile is-size-3-desktop has-text-centered ">Total number of times searched:</th>
+				</tr>
+			</thead>
+			
+
+			<tbody>
+			@forelse ($searchterms as $searchterm)
+			<tr>
+				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$searchterm->searchterm}}</p></td>				
+				<td><p class="title is-size-6-mobile is-size-3-desktop has-text-centered ">{{$searchterm->Searchcount}}</p></td>
+			</tr>
+
+			@empty
+              <div class="container has-text-centered">
+              <h1 class = "subtitle is-size-3-desktop has-text-white ">
+                   No questions searched so far!
+              </h1>
+              </div>
+			
+			@endforelse
+			</tbody>
+			</table>
+						
 		</div>
 
 		

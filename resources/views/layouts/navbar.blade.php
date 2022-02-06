@@ -8,8 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
+<!-- Bootstrap autocomplete   -->
 
 <!-- Bulma CSS -->	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
@@ -110,6 +109,36 @@ td {
 
 </head>
 <body  class=" has-navbar-fixed-top">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+	<script>
+  $( function() {
+
+    var availableTags = [];
+
+	$.ajax({
+		method:"GET",
+		url:"/user/autocomplete",
+	 
+		success: function(response){
+		console.log(response);
+			Autocompleteterms(response);
+		}
+
+
+	});
+
+	function Autocompleteterms(availableTags){
+		$( "#search" ).autocomplete({
+		source: availableTags
+		});
+	}
+   
+
+  });
+  </script>
+    
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
      

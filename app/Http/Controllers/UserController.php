@@ -7,17 +7,23 @@ use App\Models\Guides;
 use App\Models\comments;
 use App\Models\logs;
 use App\Models\Search;
-
+use App\Models\SearchTerms;
 class UserController extends Controller
 {
     function index(){
         $user = Auth::user();
 
-        //get most searched queries
+        //get most searched queries without results 
         $searches = Search::select('search_term','Search_count')
                     ->orderByDesc('Search_count')
                     ->limit(5)
                     ->get();
+
+        //get most searched queries
+        $searchterms = SearchTerms::select('searchterm','Searchcount')
+        ->orderByDesc('Searchcount')
+        ->limit(5)
+        ->get();
 
         $Latestguides = Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','guides.updated_at','users.fname','users.lname')
@@ -30,6 +36,7 @@ class UserController extends Controller
 
     return view('dashboard.user.index')
         ->with('searches',$searches)
+        ->with('searchterms',$searchterms)
         ->with('user',$user)
         ->with('Latestguides',$Latestguides)
         ->with('Updatedguides',$Updatedguides);
@@ -42,10 +49,17 @@ class UserController extends Controller
         ->limit(5)
         ->get();
 
+         //get most searched queries
+         $searchterms = SearchTerms::select('searchterm','Searchcount')
+         ->orderByDesc('Searchcount')
+         ->limit(5)
+         ->get();
+ 
         
         $Allguides = Guides::paginate(10);
         return view('dashboard.user.view')
         ->with('searches',$searches)
+        ->with('searchterms',$searchterms)
         ->with('user',$user)
         ->with('guides',$Allguides);
 
@@ -58,8 +72,14 @@ class UserController extends Controller
                     ->limit(5)
                     ->get();
 
+        $searchterms = SearchTerms::select('searchterm','Searchcount')
+        ->orderByDesc('Searchcount')
+        ->limit(5)
+        ->get();
+
     return view('dashboard.user.guide')
         ->with('searches',$searches)
+        ->with('searchterms',$searchterms)
         ->with('user',$user)
         ->with('guides',Guides::join('users','users.id','=','guides.UserID')
         ->select('guides.views','guides.UserID','guides.id','guides.title','guides.slug','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')

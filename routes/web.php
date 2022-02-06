@@ -47,6 +47,9 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
    
   
     Route::get('/search',[SearchController::class,'search'])->name('web.search');
+    Route::get('/autocomplete', [SearchController::class,'autocomplete'])->name('autocomplete');
+    
+    
     Route::post('/changepass',[PasswordController::class,'changepassword'])->name('change.pass');
 
     Route::post('/guide/{slug}/comments',[CommentController::class, 'store'])->name('comment.store');
@@ -60,8 +63,8 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
     Route::get('/manager/GuideDetails',[ManagerController::class, 'getDetails'])->name('guides.details');
     
     Route::get('/allguides', [UserController::class,'AllGuides'])->name('all.guides');
-    
 
+   
     Route::get('guide', [UserController::class,'index'])->name('manager.guides');
     
     Route::get('settings', [ManagerController::class,'settings'])->name('manager.settings');
