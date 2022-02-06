@@ -109,7 +109,7 @@ td {
 
 </head>
 <body  class=" has-navbar-fixed-top">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
 	<script>
