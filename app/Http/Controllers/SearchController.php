@@ -73,6 +73,7 @@ class SearchController extends Controller
 
         $data = Guides:: select("index")->get();
         $indexes =[];
+        $indices = [];
         foreach ($data as $index){
             $indexes[] = Str::of($index['index'])->explode(',');
         }     
@@ -80,7 +81,7 @@ class SearchController extends Controller
         //removes duplicates
         $indices = array_unique($indices);
     
-        return response()->json($indices);
+        return $indices ;
     }
 
 
