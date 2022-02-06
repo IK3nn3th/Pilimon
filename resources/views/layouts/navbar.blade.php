@@ -123,7 +123,7 @@ td {
 	 
 		success: function(response){
 		console.log(response);
-			Autocompleteterms(response);
+			Autocompleteterms({source:response});
 		}
 
 
@@ -138,7 +138,7 @@ td {
 
   });
   </script>
-    
+
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
      
