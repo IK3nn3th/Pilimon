@@ -112,31 +112,7 @@ td {
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
-	<script>
-  $( function() {
-
-    var availableTags = [];
-
-	$.ajax({
-		method:"GET",
-		url:"/user/autocomplete",
-	 
-		success: function(response){
-		console.log(response);
-		//	Autocompleteterms(response);
-    $( "#search" ).autocomplete({
-		source: response
-		});
-
-		}
-
-
-	});
- 
-
-  });
-  </script>
-    
+	
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
      
@@ -241,6 +217,8 @@ td {
 
 @yield('content')
 
+
+
 <br><br><br><br><br><br>
 <footer class="footer footer-size">
  
@@ -292,6 +270,33 @@ $(document).ready(function() {
 
 }
 @endif
+
+
+<script>
+  $( function() {
+
+    var availableTags = [];
+
+	$.ajax({
+		method:"GET",
+		url:"/user/autocomplete",
+	 
+		success: function(response){
+		console.log(response);
+		//	Autocompleteterms(response);
+    $( "#search" ).autocomplete({
+		source: response
+		});
+
+		}
+
+
+	});
+ 
+
+  });
+  </script>
+    
 
 <script type="text/javascript">
 
