@@ -81,7 +81,7 @@ class SearchController extends Controller
         //removes duplicates
         $indices = array_unique($indices);
     
-        return response()->json($result);
+        return response()->json($indices);
     }
 
 
