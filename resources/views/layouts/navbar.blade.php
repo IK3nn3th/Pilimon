@@ -138,27 +138,31 @@ td {
       "Scala",
       "Scheme"];
 
-	$.ajax({
-		method:"GET",
-		url:"/user/autocomplete",
-	 
-		success: function(response){
-		//console.log(response);
-		//	Autocompleteterms(response);
-		}
+      $.ajax({
+        method:"GET",
+        url:"/user/autocomplete",
+      
+        success: function(response){
+         
+        // 	Autocompleteterms(response);
+           console.log(response);
+           $("#search").autocomplete({
+ 
+        source: response
+          });
+
+        }
 
 
-	});
+      });
+      console.log(availableTags);
+      
+      
 
-	$( "#search" ).autocomplete({
-		source: availableTags
-		});
-	function Autocompleteterms(availableTags){
-	
-	}
-   
+
 
   });
+
   </script>
     
 <nav class="navbar is-fixed-top navbarcolor" role="navigation" aria-label="main navigation">
