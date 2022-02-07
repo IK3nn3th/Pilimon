@@ -115,28 +115,7 @@ td {
 	<script>
   $( function() {
 
-    var availableTags = [ "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"];
+    var availableTags = [];
 
       $.ajax({
         method:"GET",
@@ -145,9 +124,7 @@ td {
         success: function(response){
          
         // 	Autocompleteterms(response);
-        Object.values(response).forEach(myFunction);
-        console.log(response); 
-        
+        Object.values(response).forEach(myFunction);     
         }
 
 
@@ -155,10 +132,12 @@ td {
       function myFunction(item) {
         availableTags.push(item); 
       }
-      console.log(availableTags); 
+       
       $("#search").autocomplete({
  
-        source: availableTags
+        source: availableTags,
+        minLength:3
+
       });
    
 
