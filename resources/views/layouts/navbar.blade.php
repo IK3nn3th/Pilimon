@@ -145,8 +145,8 @@ td {
         success: function(response){
          
         // 	Autocompleteterms(response);
-        Array.from(response).forEach(myFunction);
-    
+        Object.keys(response).forEach(myFunction);
+        console.log(response); 
         
         }
 
