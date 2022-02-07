@@ -54,6 +54,7 @@ Route::group(['prefix'=>'user', 'middleware' =>['isUser','auth']], function(){
 
     Route::post('/guide/{slug}/comments',[CommentController::class, 'store'])->name('comment.store');
     Route::post('/guide/{slug}/like',[CommentController::class, 'savelike'])->name('like.store');
+    Route::post('/guide/{slug}/unlike',[CommentController::class, 'saveUnlike'])->name('unlike.store');
 
     Route::post('/comments/{id}',[UserController::class, 'deletecomment'])->name('comments.delete');
     Route::get('user/dashboard', [UserController::class,'index'])->name('user.dashboard');   

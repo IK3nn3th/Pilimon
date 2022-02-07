@@ -112,14 +112,27 @@ class UserController extends Controller
         $guides =  Guides::where('slug',$slug)->first();
         $reactantFacade = $guides->viaLoveReactant();
         $reactionCounters = $reactantFacade->getReactionCounterOfType('Like')->getCount();
+        //Get total dislikes
+        $guides =  Guides::where('slug',$slug)->first();
+        $reactantFacade = $guides->viaLoveReactant();
+        $dislikeCounters = $reactantFacade->getReactionCounterOfType('unhelpful')->getCount();
       
+
+
+
         //check if the user liked
         $reacterFacade = $user->viaLoveReacter();
-        if ( $reacterFacade->hasNotReactedTo($guides)){
+        if ( $reacterFacade->hasNotReactedTo($guides,'Like')){
             $likeCheck = 0;     
         }
         else{
             $likeCheck = 1;  
+        }
+        if ( $reacterFacade->hasNotReactedTo($guides,'Unhelpful')){
+            $DislikeCheck = 0;     
+        }
+        else{
+            $DislikeCheck = 1;  
         }
         
         
@@ -135,6 +148,8 @@ class UserController extends Controller
           ->with('comments',$comments)
           ->with('user',$user)
           ->with('likes',$reactionCounters)
+          ->with('dislikeCounters',$dislikeCounters)
+          ->with('DislikeCheck',$DislikeCheck)
           ->with('likeCheck',$likeCheck)
           ->with('guides', Guides::join('users','users.id','=','guides.UserID')
           ->select('guides.id','guides.title','guides.UserID','guides.category','guides.description','guides.content','guides.updated_at','users.fname','users.lname')

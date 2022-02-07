@@ -53,22 +53,43 @@
                         <form action="/user/guide/{{$guides->id}}/like" method = "POST">
                             @csrf 
                             @if ($likeCheck == 1)
-                            <button name= "submit" class="button is-ghost is-size-3-desktop is-size-5-mobile">
-                            <i class="fa fa-thumbs-up"></i> Liked
+                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                            <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Very Helpful</b>
                             </button>
                             @else
-                            <button name= "submit" class="button is-ghost is-size-3-desktop is-size-5-mobile">
-                            <i class="fa fa-thumbs-o-up"></i> Like
+                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                            <i class="fa fa-thumbs-o-up"></i>&nbsp Very Helpful
                             </button>
                             @endif
                         </form>
                     </div>
+ <!--unhelpful question -->
+                    <div>
+                        <form action="/user/guide/{{$guides->id}}/unlike" method = "POST">
+                            @csrf 
+                            @if ($DislikeCheck == 1)
+                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                            <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Not Helpful</b>
+                            </button>
+                            @else
+                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                            <i class="fa fa-thumbs-o-up"></i> &nbsp Not Helpful
+                            </button>
+                            @endif
+                        </form>
+                    </div>
+
                 </div>
+                
+                    
+                
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="heading">Total Likes</p>
-                
-                        <p class="title">{{$likes}}</p>
+                        <p class="subtitle"><b>{{$likes}} users find this HELPFUL</b></p> <br>
+                    
+                        <p class="subtitle"><b>{{$dislikeCounters}} users find this NOT HELPFUL</b></p>
+
+                        
                     </div>
                 </div>  
             </card>
