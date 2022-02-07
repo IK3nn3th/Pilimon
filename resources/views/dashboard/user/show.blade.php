@@ -40,60 +40,61 @@
 <section class="section">
   
         <div class="card bm--card-equal-height">
-            <card class="card-content">
-                <div class="level is-mobile">
-                    <div class="level-item has-text-centered">
-                        <div>
-                        <p class="title  is-size-6-mobile is-size-3-desktop">Is this helpful?</p>
-                        <p class="title  is-size-6-mobile is-size-3-desktop ">Let us know!</p>
-                        </div>
-                    </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <form action="/user/guide/{{$guides->id}}/like" method = "POST">
-                            @csrf 
-                            @if ($likeCheck == 1)
-                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
-                            <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Very Helpful</b>
-                            </button>
-                            @else
-                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
-                            <i class="fa fa-thumbs-o-up"></i>&nbsp Very Helpful
-                            </button>
-                            @endif
-                        </form>
-                    </div>
- <!--unhelpful question -->
-                    <div>
-                        <form action="/user/guide/{{$guides->id}}/unlike" method = "POST">
-                            @csrf 
-                            @if ($DislikeCheck == 1)
-                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
-                            <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Not Helpful</b>
-                            </button>
-                            @else
-                            <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
-                            <i class="fa fa-thumbs-o-up"></i> &nbsp Not Helpful
-                            </button>
-                            @endif
-                        </form>
-                    </div>
-
-                </div>
+            <header class="card-header  ">
                 
-                    
-                
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="subtitle"><b>{{$likes}} users find this HELPFUL</b></p> <br>
-                    
-                        <p class="subtitle"><b>{{$dislikeCounters}} users find this NOT HELPFUL</b></p>
+                        <p class="card-header-title  is-size-5-mobile is-size-4-desktop">Is this helpful? Let us know!</p>
 
-                        
-                    </div>
+            </header>
+
+            
+            <div class="card-footer">
+
+                <div class="card-footer-item">
+                         
+                         <form action="/user/guide/{{$guides->id}}/like" method = "POST">
+                             @csrf 
+                             @if ($likeCheck == 1)
+                             <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                             <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Very Helpful</b>
+                             </button>
+                             @else
+                             <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                             <i class="fa fa-thumbs-o-up"></i>&nbsp Very Helpful
+                             </button>
+                             @endif
+                         </form>
                 </div>  
-            </card>
+                         <!--unhelpful question -->
+                <div class="card-footer-item">  
+                         <form action="/user/guide/{{$guides->id}}/unlike" method = "POST">
+                             @csrf 
+                             @if ($DislikeCheck == 1)
+                             <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                             <i class="fa fa-thumbs-up"></i>&nbsp<b>Voted Not Helpful</b>
+                             </button>
+                             @else
+                             <button name= "submit" class="button is-ghost is-size-5-desktop is-size-6-mobile">
+                             <i class="fa fa-thumbs-o-up"></i> &nbsp Not Helpful
+                             </button>
+                             @endif
+                         </form>
+                 </div>
+            </div>
         </div>
+
+        <nav class="level has-background-light has-text-black	">
+            <div class="level-item has-text-centered">
+                <div><br>
+                <p class="subtitle"><b>{{$likes}} user/s find this HELPFUL</b></p>  
+                <br> </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div><br>
+                <p class="subtitle"><b>{{$dislikeCounters}} user/s find this NOT HELPFUL</b></p>
+                <br>
+                </div>
+            </div>
+        </nav>
   
 </section>
 
