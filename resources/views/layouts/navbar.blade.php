@@ -145,7 +145,7 @@ td {
         success: function(response){
          
         // 	Autocompleteterms(response);
-        response.forEach(myFunction);
+        Array.from(response).forEach(myFunction);
     
         
         }
