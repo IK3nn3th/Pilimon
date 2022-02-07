@@ -145,20 +145,22 @@ td {
         success: function(response){
          
         // 	Autocompleteterms(response);
-           console.log(response);
-           $("#search").autocomplete({
- 
-        source: response
-          });
-
+        response.forEach(myFunction);
+    
+        
         }
 
 
       });
-      console.log(availableTags);
-      
-      
-
+      function myFunction(item) {
+        availableTags.push(item); 
+      }
+      console.log(availableTags); 
+      $("#search").autocomplete({
+ 
+        source: availableTags
+      });
+   
 
 
   });
